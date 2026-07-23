@@ -1,0 +1,461 @@
+[
+  {
+    "id": "B01",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 125389,
+    "penbClass": "C",
+    "pneKwhM2": 162.2,
+    "pneYear": 2024
+  },
+  {
+    "id": "B02",
+    "park": null,
+    "category": "Výroba",
+    "areaM2": 9783,
+    "penbClass": null,
+    "pneKwhM2": 112.1,
+    "pneYear": 2024
+  },
+  {
+    "id": "B03",
+    "park": null,
+    "category": "Výroba",
+    "areaM2": 22725,
+    "penbClass": null,
+    "pneKwhM2": 455.1,
+    "pneYear": 2023
+  },
+  {
+    "id": "B04",
+    "park": null,
+    "category": "Výroba",
+    "areaM2": 17014,
+    "penbClass": null,
+    "pneKwhM2": 451.3,
+    "pneYear": 2023
+  },
+  {
+    "id": "B05",
+    "park": null,
+    "category": "Výroba",
+    "areaM2": 5711,
+    "penbClass": null,
+    "pneKwhM2": 54.4,
+    "pneYear": 2023
+  },
+  {
+    "id": "B06",
+    "park": null,
+    "category": "Výroba",
+    "areaM2": 25549,
+    "penbClass": null,
+    "pneKwhM2": 404.5,
+    "pneYear": 2023
+  },
+  {
+    "id": "B07",
+    "park": null,
+    "category": "Výroba",
+    "areaM2": 14833,
+    "penbClass": "C",
+    "pneKwhM2": 239.4,
+    "pneYear": 2024
+  },
+  {
+    "id": "B08",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 8335,
+    "penbClass": "C",
+    "pneKwhM2": 88.6,
+    "pneYear": 2024
+  },
+  {
+    "id": "B09",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 17594,
+    "penbClass": "B",
+    "pneKwhM2": 49.9,
+    "pneYear": 2024
+  },
+  {
+    "id": "B10",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 102419,
+    "penbClass": "C",
+    "pneKwhM2": 89.3,
+    "pneYear": 2024
+  },
+  {
+    "id": "B11",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 11148,
+    "penbClass": null,
+    "pneKwhM2": 85.9,
+    "pneYear": 2024
+  },
+  {
+    "id": "B12",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 7483,
+    "penbClass": null,
+    "pneKwhM2": 41.4,
+    "pneYear": 2024
+  },
+  {
+    "id": "B13",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 3522,
+    "penbClass": null,
+    "pneKwhM2": 55.8,
+    "pneYear": 2024
+  },
+  {
+    "id": "B14",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 24686,
+    "penbClass": null,
+    "pneKwhM2": 59.8,
+    "pneYear": 2024
+  },
+  {
+    "id": "B15",
+    "park": null,
+    "category": "Výroba",
+    "areaM2": 8188,
+    "penbClass": null,
+    "pneKwhM2": 32.2,
+    "pneYear": 2024
+  },
+  {
+    "id": "B16",
+    "park": "Panattoni Park Cheb",
+    "category": "Sklad & logistika",
+    "areaM2": 34830,
+    "penbClass": null,
+    "pneKwhM2": 30.1,
+    "pneYear": 2024
+  },
+  {
+    "id": "B17",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 34788,
+    "penbClass": null,
+    "pneKwhM2": 48.0,
+    "pneYear": 2023
+  },
+  {
+    "id": "B18",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 16755,
+    "penbClass": null,
+    "pneKwhM2": 58.2,
+    "pneYear": 2023
+  },
+  {
+    "id": "B19",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 18033,
+    "penbClass": null,
+    "pneKwhM2": 36.9,
+    "pneYear": 2023
+  },
+  {
+    "id": "B20",
+    "park": "Panattoni Park Prestice",
+    "category": "Výroba",
+    "areaM2": 14015,
+    "penbClass": "A",
+    "pneKwhM2": 434.6,
+    "pneYear": 2024
+  },
+  {
+    "id": "B21",
+    "park": "Panattoni Park Cheb South - Real Digital",
+    "category": "Sklad & logistika",
+    "areaM2": 27326,
+    "penbClass": "A",
+    "pneKwhM2": 40.0,
+    "pneYear": 2024
+  },
+  {
+    "id": "B22",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 21350,
+    "penbClass": null,
+    "pneKwhM2": 86.3,
+    "pneYear": 2023
+  },
+  {
+    "id": "B23",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 11830,
+    "penbClass": null,
+    "pneKwhM2": 31.3,
+    "pneYear": 2023
+  },
+  {
+    "id": "B24",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 9520,
+    "penbClass": null,
+    "pneKwhM2": 13.6,
+    "pneYear": 2023
+  },
+  {
+    "id": "B25",
+    "park": null,
+    "category": "Výroba",
+    "areaM2": 12408,
+    "penbClass": null,
+    "pneKwhM2": 130.8,
+    "pneYear": 2023
+  },
+  {
+    "id": "B26",
+    "park": "Panattoni Park Cheb",
+    "category": "Sklad & výroba",
+    "areaM2": 12897,
+    "penbClass": "A",
+    "pneKwhM2": 59.6,
+    "pneYear": 2024
+  },
+  {
+    "id": "B27",
+    "park": "Panattoni Park Stribro",
+    "category": "Výroba",
+    "areaM2": 16225,
+    "penbClass": "A",
+    "pneKwhM2": 183.0,
+    "pneYear": 2023
+  },
+  {
+    "id": "B28",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 186903,
+    "penbClass": "B",
+    "pneKwhM2": 49.1,
+    "pneYear": 2024
+  },
+  {
+    "id": "B29",
+    "park": "Panattoni Park Teplice South",
+    "category": "Sklad & logistika",
+    "areaM2": 9220,
+    "penbClass": "C",
+    "pneKwhM2": 301.2,
+    "pneYear": 2024
+  },
+  {
+    "id": "B30",
+    "park": "Panattoni Park Teplice South",
+    "category": "Sklad & logistika",
+    "areaM2": 14546,
+    "penbClass": "C",
+    "pneKwhM2": 216.4,
+    "pneYear": 2024
+  },
+  {
+    "id": "B31",
+    "park": "Panattoni Park Teplice South",
+    "category": "Sklad & logistika",
+    "areaM2": 2385,
+    "penbClass": "C",
+    "pneKwhM2": 364.5,
+    "pneYear": 2024
+  },
+  {
+    "id": "B32",
+    "park": "Panattoni Park Teplice South",
+    "category": "Výroba",
+    "areaM2": 6332,
+    "penbClass": "C",
+    "pneKwhM2": 298.7,
+    "pneYear": 2024
+  },
+  {
+    "id": "B33",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 13361,
+    "penbClass": null,
+    "pneKwhM2": 53.8,
+    "pneYear": 2024
+  },
+  {
+    "id": "B34",
+    "park": "Panattoni Park Cheb South",
+    "category": "Sklad & logistika",
+    "areaM2": 43066,
+    "penbClass": "B",
+    "pneKwhM2": 41.5,
+    "pneYear": 2024
+  },
+  {
+    "id": "B35",
+    "park": "Panattoni Park Cheb South",
+    "category": "Sklad & logistika",
+    "areaM2": 5357,
+    "penbClass": "A",
+    "pneKwhM2": 595.2,
+    "pneYear": 2024
+  },
+  {
+    "id": "B36",
+    "park": "Panattoni Park Ostrov North",
+    "category": "Sklad & výroba",
+    "areaM2": 20232,
+    "penbClass": "C",
+    "pneKwhM2": 89.3,
+    "pneYear": 2024
+  },
+  {
+    "id": "B37",
+    "park": "Panattoni Park Cheb East",
+    "category": "Sklad & logistika",
+    "areaM2": 60905,
+    "penbClass": "B",
+    "pneKwhM2": 24.1,
+    "pneYear": 2024
+  },
+  {
+    "id": "B38",
+    "park": null,
+    "category": "Sklad & logistika",
+    "areaM2": 6872,
+    "penbClass": null,
+    "pneKwhM2": 582.3,
+    "pneYear": 2024
+  },
+  {
+    "id": "B39",
+    "park": "Panattoni Park Kladno South",
+    "category": "Výroba",
+    "areaM2": 36849,
+    "penbClass": "A",
+    "pneKwhM2": 360.8,
+    "pneYear": 2024
+  },
+  {
+    "id": "B40",
+    "park": "Panattoni Park Zdice",
+    "category": "Sklad & logistika",
+    "areaM2": 12259,
+    "penbClass": null,
+    "pneKwhM2": 11.4,
+    "pneYear": 2024
+  },
+  {
+    "id": "B41",
+    "park": "Panattoni Park Chomutov North",
+    "category": "Výroba",
+    "areaM2": 14964,
+    "penbClass": "B",
+    "pneKwhM2": 478.7,
+    "pneYear": 2024
+  },
+  {
+    "id": "B42",
+    "park": "Panattoni Park Týniště nad Orlicí",
+    "category": "Sklad & logistika",
+    "areaM2": 16644,
+    "penbClass": "C",
+    "pneKwhM2": 18.8,
+    "pneYear": 2024
+  },
+  {
+    "id": "B43",
+    "park": "Panattoni Park Týniště nad Orlicí",
+    "category": "Sklad & logistika",
+    "areaM2": 9861,
+    "penbClass": "C",
+    "pneKwhM2": 16.3,
+    "pneYear": 2024
+  },
+  {
+    "id": "B44",
+    "park": "Panattoni Park Pilsen West II",
+    "category": "Výroba",
+    "areaM2": 25135,
+    "penbClass": "B",
+    "pneKwhM2": 53.9,
+    "pneYear": 2024
+  },
+  {
+    "id": "B45",
+    "park": "Panattoni Park Pilsen West II",
+    "category": "Výroba",
+    "areaM2": 36463,
+    "penbClass": "B",
+    "pneKwhM2": 229.3,
+    "pneYear": 2024
+  },
+  {
+    "id": "B46",
+    "park": "Panattoni Park Prague Airport II",
+    "category": "Sklad & logistika",
+    "areaM2": 24776,
+    "penbClass": "C",
+    "pneKwhM2": 40.3,
+    "pneYear": 2024
+  },
+  {
+    "id": "B47",
+    "park": "Panattoni Park Prague Airport II",
+    "category": "Sklad & logistika",
+    "areaM2": 21171,
+    "penbClass": null,
+    "pneKwhM2": 26.3,
+    "pneYear": 2024
+  },
+  {
+    "id": "B48",
+    "park": "Panattoni Park Prague Airport II",
+    "category": "Sklad & logistika",
+    "areaM2": 24657,
+    "penbClass": null,
+    "pneKwhM2": 17.8,
+    "pneYear": 2024
+  },
+  {
+    "id": "B49",
+    "park": "Panattoni Park Prague Airport II",
+    "category": "Sklad & výroba",
+    "areaM2": 6775,
+    "penbClass": null,
+    "pneKwhM2": 32.7,
+    "pneYear": 2024
+  },
+  {
+    "id": "B50",
+    "park": "Panattoni Park Prague Airport II",
+    "category": "Sklad & logistika",
+    "areaM2": 1641,
+    "penbClass": null,
+    "pneKwhM2": 37.8,
+    "pneYear": 2024
+  },
+  {
+    "id": "B51",
+    "park": "Panattoni Park Prague Airport II",
+    "category": "Sklad & logistika",
+    "areaM2": 23026,
+    "penbClass": null,
+    "pneKwhM2": 88.3,
+    "pneYear": 2024
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "elePriceEurKwh": 0.09,
+  "gasPriceEurKwh": 0.042,
+  "eleCo2TPerKwh": 0.00036,
+  "gasCo2TPerKwh": 0.000202,
+  "eleShareDefault": 0.80,
+  "gasShareDefault": 0.20,
+  "referencePneKwhM2": 30,
+  "classDefaultsKwhM2": {
+    "A": 40,
+    "B": 55,
+    "C": 90,
+    "D": 160,
+    "E": 250,
+    "F": 380,
+    "G": 550
+  },
+  "classBoundariesKwhM2": {
+    "A": 75,
+    "B": 143,
+    "C": 200,
+    "D": 350,
+    "E": 500,
+    "F": 650,
+    "G": null
+  }
+}
