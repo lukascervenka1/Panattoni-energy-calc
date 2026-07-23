@@ -8,14 +8,29 @@ import { ArrowRightIcon, CloseIcon } from "./icons";
 export function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   useEffect(() => {
     if (!open) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+
+    // Locking scroll via `overflow: hidden` alone leaves the page's scroll
+    // offset in place, which on mobile browsers lets the address bar
+    // collapse/expand mid-interaction and desyncs the fixed overlay's
+    // layout box from where touches actually land. Pinning `body` to the
+    // current scroll position avoids that.
+    const scrollY = window.scrollY;
+    const body = document.body.style;
+    const previous = { position: body.position, top: body.top, width: body.width };
+    body.position = "fixed";
+    body.top = `-${scrollY}px`;
+    body.width = "100%";
+
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
     }
     window.addEventListener("keydown", onKeyDown);
+
     return () => {
-      document.body.style.overflow = previousOverflow;
+      body.position = previous.position;
+      body.top = previous.top;
+      body.width = previous.width;
+      window.scrollTo(0, scrollY);
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [open, onClose]);
@@ -39,7 +54,7 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
           type="button"
           onClick={onClose}
           aria-label="Zavřít"
-          className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+          className="absolute right-2 top-2 z-10 flex h-11 w-11 items-center justify-center rounded-full text-white/60 transition-colors hover:bg-white/10 hover:text-white"
         >
           <CloseIcon className="h-4 w-4" />
         </button>

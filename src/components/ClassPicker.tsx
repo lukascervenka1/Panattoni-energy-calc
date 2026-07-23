@@ -57,10 +57,7 @@ export function ClassPicker({
             }}
           >
             {c}
-            <span
-              className="font-mono text-[10px] font-normal opacity-70"
-              style={{ fontFamily: "var(--font-mono, monospace)" }}
-            >
+            <span className="font-mono text-[10px] font-normal opacity-70">
               {boundaryLabel(config, c)}
             </span>
           </button>
