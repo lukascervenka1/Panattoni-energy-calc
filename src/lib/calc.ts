@@ -14,6 +14,7 @@ export interface CalculatorResult {
   annualSavingsEur: number;
   annualSavingsMwh: number;
   annualCo2SavingsT: number;
+  fiveYearSavingsEur: number;
   tenYearSavingsEur: number;
 }
 
@@ -42,6 +43,7 @@ export function calculateSavings(
       annualSavingsEur: 0,
       annualSavingsMwh: 0,
       annualCo2SavingsT: 0,
+      fiveYearSavingsEur: 0,
       tenYearSavingsEur: 0,
     };
   }
@@ -66,6 +68,7 @@ export function calculateSavings(
     annualSavingsEur,
     annualSavingsMwh: Math.round(deltaKwh / 1000),
     annualCo2SavingsT,
+    fiveYearSavingsEur: annualSavingsEur * 5,
     tenYearSavingsEur: annualSavingsEur * 10,
   };
 }

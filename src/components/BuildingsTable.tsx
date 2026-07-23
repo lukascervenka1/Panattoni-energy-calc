@@ -25,10 +25,7 @@ export function BuildingsTable({
   const sorted = [...buildings].sort((a, b) => a.pneKwhM2 - b.pneKwhM2);
 
   return (
-    <div
-      className="rounded-2xl border p-5 sm:p-6"
-      style={{ borderColor: "var(--color-border-default)", background: "var(--color-surface)" }}
-    >
+    <div>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}

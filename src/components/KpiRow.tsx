@@ -1,27 +1,49 @@
 import type { CalculatorResult } from "@/lib/calc";
-import { formatEur, formatNumber } from "@/lib/calc";
+import { formatNumber } from "@/lib/calc";
+import { BoltIcon, LeafIcon } from "./icons";
 
-function KpiCard({ label, value, unit }: { label: string; value: string; unit: string }) {
+function Stat({
+  icon,
+  label,
+  value,
+  unit,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  unit: string;
+}) {
   return (
-    <div
-      className="rounded-xl border p-4"
-      style={{ borderColor: "var(--color-border-default)", background: "var(--color-surface)" }}
-    >
-      <p className="mb-1 text-[11px] uppercase tracking-wide text-[var(--color-text-muted)]">
+    <div className="flex flex-1 flex-col gap-1 px-5 py-4 sm:p-5">
+      <div className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-[var(--color-text-muted)]">
+        <span style={{ color: "var(--color-accent)" }}>{icon}</span>
         {label}
+      </div>
+      <p className="font-heading text-xl font-semibold tracking-[-0.02em] sm:text-2xl">
+        {value} <span className="text-sm font-normal text-[var(--color-text-muted)]">{unit}</span>
       </p>
-      <p className="text-xl font-medium sm:text-2xl">{value}</p>
-      <p className="mt-0.5 text-[11px] text-[var(--color-text-muted)]">{unit}</p>
     </div>
   );
 }
 
 export function KpiRow({ result }: { result: CalculatorResult }) {
   return (
-    <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
-      <KpiCard label="Úspora energie" value={formatNumber(result.annualSavingsMwh)} unit="MWh / rok" />
-      <KpiCard label="Snížení CO₂" value={formatNumber(result.annualCo2SavingsT)} unit="t CO₂ / rok" />
-      <KpiCard label="Úspora 10 let" value={formatEur(result.tenYearSavingsEur)} unit="kumulativně" />
+    <div
+      className="flex flex-col divide-y divide-[var(--color-border-default)] rounded-xl border border-[var(--color-border-default)] sm:flex-row sm:divide-x sm:divide-y-0"
+      style={{ background: "var(--color-surface)" }}
+    >
+      <Stat
+        icon={<BoltIcon className="h-3.5 w-3.5" />}
+        label="Úspora energie"
+        value={formatNumber(result.annualSavingsMwh)}
+        unit="MWh / rok"
+      />
+      <Stat
+        icon={<LeafIcon className="h-3.5 w-3.5" />}
+        label="Snížení CO₂"
+        value={formatNumber(result.annualCo2SavingsT)}
+        unit="t CO₂ / rok"
+      />
     </div>
   );
 }

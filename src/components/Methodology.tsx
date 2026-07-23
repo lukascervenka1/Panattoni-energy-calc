@@ -11,10 +11,7 @@ function formatPrice(n: number): string {
 export function Methodology({ config }: { config: CalculatorConfig }) {
   const [open, setOpen] = useState(false);
   return (
-    <div
-      className="rounded-2xl border p-5 sm:p-6"
-      style={{ borderColor: "var(--color-border-default)", background: "var(--color-surface)" }}
-    >
+    <div>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}

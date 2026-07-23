@@ -1,15 +1,13 @@
 export function CardHeader({ step, label }: { step: number; label: string }) {
   return (
-    <div className="mb-4 flex items-center gap-2.5">
+    <div className="mb-5 flex items-center gap-3">
       <span
-        className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border text-[11px] font-semibold"
-        style={{ borderColor: "var(--color-border-default)", color: "var(--color-text-muted)" }}
+        className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full font-heading text-sm font-semibold text-white"
+        style={{ background: "#061133" }}
       >
         {step}
       </span>
-      <span className="text-[11px] font-medium uppercase tracking-wide text-[var(--color-text-muted)]">
-        {label}
-      </span>
+      <span className="text-sm font-medium">{label}</span>
     </div>
   );
 }

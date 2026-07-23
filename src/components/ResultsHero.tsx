@@ -1,41 +1,79 @@
+"use client";
+
 import type { CalculatorResult } from "@/lib/calc";
 import { formatEur, formatNumber } from "@/lib/calc";
+import { useAnimatedNumber } from "@/lib/useAnimatedNumber";
+import { Glow } from "./Glow";
+
+function AnimatedEur({ value }: { value: number }) {
+  const animated = useAnimatedNumber(value);
+  return <>{formatEur(animated)}</>;
+}
+
+function AnimatedPct({ value }: { value: number }) {
+  const animated = useAnimatedNumber(value);
+  return <>{Math.round(animated)}</>;
+}
+
+function HeroStat({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="flex flex-col gap-1 px-6 py-5 sm:p-6">
+      <p className="text-[11px] font-medium uppercase tracking-wide text-white/55">{label}</p>
+      <p className="font-heading text-2xl font-semibold tracking-[-0.02em] text-white sm:text-3xl">
+        <AnimatedEur value={value} />
+      </p>
+    </div>
+  );
+}
 
 export function ResultsHero({ result }: { result: CalculatorResult }) {
   if (result.isOptimal) {
     return (
-      <div className="rounded-2xl border border-[var(--color-accent)]/30 bg-[var(--color-accent-soft)] p-6 sm:p-7">
-        <p className="mb-1 text-xs font-medium uppercase tracking-wide text-[var(--color-accent)]">
-          Vaše budova je na špičkové úrovni
-        </p>
-        <p className="text-4xl font-light tracking-tight text-[var(--color-accent)] sm:text-5xl">
-          0 €
-        </p>
-        <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-          Spotřeba {formatNumber(result.currentPneKwhM2)} kWh/(m²·rok) — srovnatelné s
-          nejúspornější čtvrtinou portfolia Panattoni.
-        </p>
+      <div className="relative overflow-hidden rounded-2xl bg-[var(--color-navy)]">
+        <Glow />
+        <div className="relative p-6 sm:p-8">
+          <p className="mb-2 text-xs font-medium uppercase tracking-wide text-white/60">
+            Vaše budova je na špičkové úrovni
+          </p>
+          <p className="font-heading text-5xl font-semibold tracking-[-0.03em] text-white sm:text-6xl">
+            0 €
+          </p>
+          <p className="mt-3 text-sm text-white/70">
+            Spotřeba {formatNumber(result.currentPneKwhM2)} kWh/(m²·rok) — srovnatelné s
+            nejúspornější čtvrtinou portfolia Panattoni.
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-emerald-500/25 bg-emerald-50 p-6 dark:bg-emerald-500/10 sm:flex-row sm:items-center sm:justify-between sm:p-7">
-      <div>
-        <p className="mb-1 text-xs font-medium uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
-          Roční úspora nákladů na energie
-        </p>
-        <p className="text-4xl font-light tracking-tight text-emerald-700 dark:text-emerald-400 sm:text-5xl">
-          {formatEur(result.annualSavingsEur)}
-        </p>
-        <p className="mt-2 text-sm text-[var(--color-text-muted)]">
+    <div className="relative overflow-hidden rounded-2xl bg-[var(--color-navy)]">
+      <Glow />
+      <div className="relative">
+        <div className="flex flex-col gap-2 p-6 sm:p-8 sm:pb-7">
+          <p className="text-xs font-medium uppercase tracking-wide text-white/60">
+            Kolik ušetříte na energiích
+          </p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span className="font-heading text-5xl font-semibold leading-none tracking-[-0.03em] text-white sm:text-6xl">
+              −<AnimatedPct value={result.reductionPct} />%
+            </span>
+            <span className="text-sm text-white/70 sm:text-base">méně energie než dnes</span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 divide-y divide-white/10 border-t border-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          <HeroStat label="Za 1 rok" value={result.annualSavingsEur} />
+          <HeroStat label="Za 5 let" value={result.fiveYearSavingsEur} />
+          <HeroStat label="Za 10 let" value={result.tenYearSavingsEur} />
+        </div>
+
+        <p className="border-t border-white/10 px-6 py-4 text-sm text-white/60 sm:px-8">
           Spotřeba: {formatNumber(result.currentPneKwhM2)} →{" "}
           {formatNumber(result.referencePneKwhM2)} kWh/(m²·rok) · úspora{" "}
           {formatNumber(result.annualSavingsMwh)} MWh/rok
         </p>
-      </div>
-      <div className="flex-shrink-0 self-start rounded-full bg-emerald-600 px-4 py-1.5 text-sm font-semibold text-white sm:self-center">
-        −{result.reductionPct}% energie
       </div>
     </div>
   );

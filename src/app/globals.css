@@ -18,25 +18,12 @@
   --color-border-default: var(--color-border);
 }
 
-:root[data-theme="dark"] {
-  --color-bg: var(--color-navy);
-  --color-surface: var(--color-navy-soft);
-  --color-text: var(--color-paper);
-  --color-text-muted: #a7adc0;
-  --color-border-default: rgba(253, 253, 255, 0.12);
-  --color-accent-soft: rgba(16, 46, 161, 0.28);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --color-bg: var(--color-navy);
-    --color-surface: var(--color-navy-soft);
-    --color-text: var(--color-paper);
-    --color-text-muted: #a7adc0;
-    --color-border-default: rgba(253, 253, 255, 0.12);
-    --color-accent-soft: rgba(16, 46, 161, 0.28);
-  }
-}
+/*
+ * The product surfaces (input panel, stats, table) are deliberately always
+ * light — Panattoni's own site pairs a dark navy hero with white content,
+ * not a user-triggered dark mode. Hero and the results block both stay
+ * fixed-navy for the same reason (see Hero.tsx, ResultsHero.tsx).
+ */
 
 @theme inline {
   --color-navy: var(--color-navy);
@@ -59,6 +46,7 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -90,7 +78,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: #061133;
   border: 3px solid var(--color-surface);
   box-shadow: 0 1px 3px rgba(2, 12, 30, 0.3);
   cursor: pointer;
@@ -105,7 +93,22 @@ input[type="range"]::-moz-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: #061133;
   border: 3px solid var(--color-surface);
   cursor: pointer;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise-in {
+  animation: rise-in 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
