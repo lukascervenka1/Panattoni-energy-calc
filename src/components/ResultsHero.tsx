@@ -1,13 +1,13 @@
 "use client";
 
 import type { CalculatorResult } from "@/lib/calc";
-import { formatEur, formatNumber } from "@/lib/calc";
+import { formatEur, formatEurPerM2, formatNumber } from "@/lib/calc";
 import { useAnimatedNumber } from "@/lib/useAnimatedNumber";
 import { Glow } from "./Glow";
 
-function AnimatedEur({ value }: { value: number }) {
+function AnimatedValue({ value, format }: { value: number; format: (n: number) => string }) {
   const animated = useAnimatedNumber(value);
-  return <>{formatEur(animated)}</>;
+  return <>{format(animated)}</>;
 }
 
 function AnimatedPct({ value }: { value: number }) {
@@ -15,12 +15,20 @@ function AnimatedPct({ value }: { value: number }) {
   return <>{Math.round(animated)}</>;
 }
 
-function HeroStat({ label, value }: { label: string; value: number }) {
+function HeroStat({
+  label,
+  value,
+  format = formatEur,
+}: {
+  label: string;
+  value: number;
+  format?: (n: number) => string;
+}) {
   return (
     <div className="flex flex-col gap-1 px-6 py-5 sm:p-6">
       <p className="text-[11px] font-medium uppercase tracking-wide text-white/55">{label}</p>
       <p className="font-heading text-2xl font-semibold tracking-[-0.02em] text-white sm:text-3xl">
-        <AnimatedEur value={value} />
+        <AnimatedValue value={value} format={format} />
       </p>
     </div>
   );
@@ -64,9 +72,13 @@ export function ResultsHero({ result }: { result: CalculatorResult }) {
         </div>
 
         <div className="grid grid-cols-1 divide-y divide-white/10 border-t border-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          <HeroStat
+            label="Úspora na m²"
+            value={result.annualSavingsEurPerM2}
+            format={formatEurPerM2}
+          />
           <HeroStat label="Za 1 rok" value={result.annualSavingsEur} />
           <HeroStat label="Za 5 let" value={result.fiveYearSavingsEur} />
-          <HeroStat label="Za 10 let" value={result.tenYearSavingsEur} />
         </div>
 
         <p className="border-t border-white/10 px-6 py-4 text-sm text-white/60 sm:px-8">

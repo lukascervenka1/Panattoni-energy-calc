@@ -12,6 +12,7 @@ export interface CalculatorResult {
   referencePneKwhM2: number;
   reductionPct: number;
   annualSavingsEur: number;
+  annualSavingsEurPerM2: number;
   annualSavingsMwh: number;
   annualCo2SavingsT: number;
   fiveYearSavingsEur: number;
@@ -41,6 +42,7 @@ export function calculateSavings(
       referencePneKwhM2,
       reductionPct: 0,
       annualSavingsEur: 0,
+      annualSavingsEurPerM2: 0,
       annualSavingsMwh: 0,
       annualCo2SavingsT: 0,
       fiveYearSavingsEur: 0,
@@ -66,6 +68,7 @@ export function calculateSavings(
     referencePneKwhM2,
     reductionPct,
     annualSavingsEur,
+    annualSavingsEurPerM2: deltaKwh * priceBlend / inputs.areaM2,
     annualSavingsMwh: Math.round(deltaKwh / 1000),
     annualCo2SavingsT,
     fiveYearSavingsEur: annualSavingsEur * 5,
@@ -89,4 +92,8 @@ export function formatEur(n: number): string {
     return (rounded / 1_000).toLocaleString("cs-CZ", { maximumFractionDigits: 1 }) + " tis. €";
   }
   return formatNumber(rounded) + " €";
+}
+
+export function formatEurPerM2(n: number): string {
+  return n.toLocaleString("cs-CZ", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " €/m²";
 }

@@ -13,6 +13,7 @@ nejúspornějších budov v ČR* (Česká spořitelna / CEVRE Consultants / Ener
   za 10 let vůči referenční hodnotě (nejúspornější čtvrtina portfolia Panattoni).
 - Pod kalkulačkou je tabulka anonymizovaných srovnatelných hal a rozklikávací
   sekce se zdroji a metodikou (viz [src/components/Methodology.tsx](src/components/Methodology.tsx)).
+- Přesný výpočetní vzorec krok za krokem je v [CALCULATION.md](CALCULATION.md).
 
 Vědomé rozhodnutí: **rok výstavby není vstupem do výpočtu.** Zdrojová studie na
 reálných datech ukázala, že rok výstavby spolehlivě nekoreluje s energetickou
@@ -45,7 +46,7 @@ daty najdete v [`reference/google-sheet-template/`](reference/google-sheet-templ
 2. Přejmenujte první list na `Buildings`, druhý na `Config`.
 3. Do `Buildings` vložte obsah `reference/google-sheet-template/buildings.csv`
    (File → Import → Upload, nebo ruční vložení).
-   Sloupce: `id, park, category, area_m2, penb_class, pne_kwh_m2, pne_year`.
+   Sloupce: `id, park, category, area_m2, year_built, penb_class, pne_kwh_m2, pne_year`.
 4. Do `Config` vložte obsah `reference/google-sheet-template/config.csv`.
    Formát je `key, value, note` — měňte pouze sloupec `value`, klíče (`ele_price_eur_kwh`,
    `class_default_a` … `class_default_g`, `class_boundary_a` … `class_boundary_g` atd.)

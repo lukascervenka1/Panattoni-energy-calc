@@ -5,6 +5,7 @@ export interface Building {
   park: string | null;
   category: string;
   areaM2: number;
+  yearBuilt: number;
   penbClass: PenbClass | null;
   pneKwhM2: number;
   pneYear: number;

@@ -45,6 +45,7 @@ function parseBuildings(records: Record<string, string>[]): Building[] {
         park: r.park?.trim() || null,
         category: r.category?.trim() || "Sklad & logistika",
         areaM2,
+        yearBuilt: num(r.year_built, 0),
         penbClass: toPenbClass(r.penb_class),
         pneKwhM2,
         pneYear: num(r.pne_year, 2024),

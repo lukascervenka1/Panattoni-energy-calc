@@ -4,6 +4,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 125389,
+    "yearBuilt": 2014,
     "penbClass": "C",
     "pneKwhM2": 162.2,
     "pneYear": 2024
@@ -13,6 +14,7 @@
     "park": null,
     "category": "Výroba",
     "areaM2": 9783,
+    "yearBuilt": 2012,
     "penbClass": null,
     "pneKwhM2": 112.1,
     "pneYear": 2024
@@ -22,6 +24,7 @@
     "park": null,
     "category": "Výroba",
     "areaM2": 22725,
+    "yearBuilt": 2015,
     "penbClass": null,
     "pneKwhM2": 455.1,
     "pneYear": 2023
@@ -31,6 +34,7 @@
     "park": null,
     "category": "Výroba",
     "areaM2": 17014,
+    "yearBuilt": 2015,
     "penbClass": null,
     "pneKwhM2": 451.3,
     "pneYear": 2023
@@ -40,6 +44,7 @@
     "park": null,
     "category": "Výroba",
     "areaM2": 5711,
+    "yearBuilt": 2015,
     "penbClass": null,
     "pneKwhM2": 54.4,
     "pneYear": 2023
@@ -49,6 +54,7 @@
     "park": null,
     "category": "Výroba",
     "areaM2": 25549,
+    "yearBuilt": 2020,
     "penbClass": null,
     "pneKwhM2": 404.5,
     "pneYear": 2023
@@ -58,6 +64,7 @@
     "park": null,
     "category": "Výroba",
     "areaM2": 14833,
+    "yearBuilt": 2016,
     "penbClass": "C",
     "pneKwhM2": 239.4,
     "pneYear": 2024
@@ -67,6 +74,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 8335,
+    "yearBuilt": 2016,
     "penbClass": "C",
     "pneKwhM2": 88.6,
     "pneYear": 2024
@@ -76,6 +84,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 17594,
+    "yearBuilt": 2016,
     "penbClass": "B",
     "pneKwhM2": 49.9,
     "pneYear": 2024
@@ -85,6 +94,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 102419,
+    "yearBuilt": 2016,
     "penbClass": "C",
     "pneKwhM2": 89.3,
     "pneYear": 2024
@@ -94,6 +104,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 11148,
+    "yearBuilt": 2016,
     "penbClass": null,
     "pneKwhM2": 85.9,
     "pneYear": 2024
@@ -103,6 +114,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 7483,
+    "yearBuilt": 2016,
     "penbClass": null,
     "pneKwhM2": 41.4,
     "pneYear": 2024
@@ -112,6 +124,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 3522,
+    "yearBuilt": 2020,
     "penbClass": null,
     "pneKwhM2": 55.8,
     "pneYear": 2024
@@ -121,6 +134,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 24686,
+    "yearBuilt": 2018,
     "penbClass": null,
     "pneKwhM2": 59.8,
     "pneYear": 2024
@@ -130,6 +144,7 @@
     "park": null,
     "category": "Výroba",
     "areaM2": 8188,
+    "yearBuilt": 2019,
     "penbClass": null,
     "pneKwhM2": 32.2,
     "pneYear": 2024
@@ -139,6 +154,7 @@
     "park": "Panattoni Park Cheb",
     "category": "Sklad & logistika",
     "areaM2": 34830,
+    "yearBuilt": 2018,
     "penbClass": null,
     "pneKwhM2": 30.1,
     "pneYear": 2024
@@ -148,6 +164,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 34788,
+    "yearBuilt": 2017,
     "penbClass": null,
     "pneKwhM2": 48.0,
     "pneYear": 2023
@@ -157,6 +174,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 16755,
+    "yearBuilt": 2017,
     "penbClass": null,
     "pneKwhM2": 58.2,
     "pneYear": 2023
@@ -166,6 +184,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 18033,
+    "yearBuilt": 2017,
     "penbClass": null,
     "pneKwhM2": 36.9,
     "pneYear": 2023
@@ -175,6 +194,7 @@
     "park": "Panattoni Park Prestice",
     "category": "Výroba",
     "areaM2": 14015,
+    "yearBuilt": 2018,
     "penbClass": "A",
     "pneKwhM2": 434.6,
     "pneYear": 2024
@@ -184,6 +204,7 @@
     "park": "Panattoni Park Cheb South - Real Digital",
     "category": "Sklad & logistika",
     "areaM2": 27326,
+    "yearBuilt": 2020,
     "penbClass": "A",
     "pneKwhM2": 40.0,
     "pneYear": 2024
@@ -193,6 +214,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 21350,
+    "yearBuilt": 2020,
     "penbClass": null,
     "pneKwhM2": 86.3,
     "pneYear": 2023
@@ -202,6 +224,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 11830,
+    "yearBuilt": 2020,
     "penbClass": null,
     "pneKwhM2": 31.3,
     "pneYear": 2023
@@ -211,6 +234,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 9520,
+    "yearBuilt": 2020,
     "penbClass": null,
     "pneKwhM2": 13.6,
     "pneYear": 2023
@@ -220,6 +244,7 @@
     "park": null,
     "category": "Výroba",
     "areaM2": 12408,
+    "yearBuilt": 2018,
     "penbClass": null,
     "pneKwhM2": 130.8,
     "pneYear": 2023
@@ -229,6 +254,7 @@
     "park": "Panattoni Park Cheb",
     "category": "Sklad & výroba",
     "areaM2": 12897,
+    "yearBuilt": 2020,
     "penbClass": "A",
     "pneKwhM2": 59.6,
     "pneYear": 2024
@@ -238,6 +264,7 @@
     "park": "Panattoni Park Stribro",
     "category": "Výroba",
     "areaM2": 16225,
+    "yearBuilt": 2021,
     "penbClass": "A",
     "pneKwhM2": 183.0,
     "pneYear": 2023
@@ -247,6 +274,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 186903,
+    "yearBuilt": 2022,
     "penbClass": "B",
     "pneKwhM2": 49.1,
     "pneYear": 2024
@@ -256,6 +284,7 @@
     "park": "Panattoni Park Teplice South",
     "category": "Sklad & logistika",
     "areaM2": 9220,
+    "yearBuilt": 2022,
     "penbClass": "C",
     "pneKwhM2": 301.2,
     "pneYear": 2024
@@ -265,6 +294,7 @@
     "park": "Panattoni Park Teplice South",
     "category": "Sklad & logistika",
     "areaM2": 14546,
+    "yearBuilt": 2023,
     "penbClass": "C",
     "pneKwhM2": 216.4,
     "pneYear": 2024
@@ -274,6 +304,7 @@
     "park": "Panattoni Park Teplice South",
     "category": "Sklad & logistika",
     "areaM2": 2385,
+    "yearBuilt": 2023,
     "penbClass": "C",
     "pneKwhM2": 364.5,
     "pneYear": 2024
@@ -283,6 +314,7 @@
     "park": "Panattoni Park Teplice South",
     "category": "Výroba",
     "areaM2": 6332,
+    "yearBuilt": 2023,
     "penbClass": "C",
     "pneKwhM2": 298.7,
     "pneYear": 2024
@@ -292,6 +324,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 13361,
+    "yearBuilt": 2022,
     "penbClass": null,
     "pneKwhM2": 53.8,
     "pneYear": 2024
@@ -301,6 +334,7 @@
     "park": "Panattoni Park Cheb South",
     "category": "Sklad & logistika",
     "areaM2": 43066,
+    "yearBuilt": 2023,
     "penbClass": "B",
     "pneKwhM2": 41.5,
     "pneYear": 2024
@@ -310,6 +344,7 @@
     "park": "Panattoni Park Cheb South",
     "category": "Sklad & logistika",
     "areaM2": 5357,
+    "yearBuilt": 2023,
     "penbClass": "A",
     "pneKwhM2": 595.2,
     "pneYear": 2024
@@ -319,6 +354,7 @@
     "park": "Panattoni Park Ostrov North",
     "category": "Sklad & výroba",
     "areaM2": 20232,
+    "yearBuilt": 2023,
     "penbClass": "C",
     "pneKwhM2": 89.3,
     "pneYear": 2024
@@ -328,6 +364,7 @@
     "park": "Panattoni Park Cheb East",
     "category": "Sklad & logistika",
     "areaM2": 60905,
+    "yearBuilt": 2024,
     "penbClass": "B",
     "pneKwhM2": 24.1,
     "pneYear": 2024
@@ -337,6 +374,7 @@
     "park": null,
     "category": "Sklad & logistika",
     "areaM2": 6872,
+    "yearBuilt": 2021,
     "penbClass": null,
     "pneKwhM2": 582.3,
     "pneYear": 2024
@@ -346,6 +384,7 @@
     "park": "Panattoni Park Kladno South",
     "category": "Výroba",
     "areaM2": 36849,
+    "yearBuilt": 2024,
     "penbClass": "A",
     "pneKwhM2": 360.8,
     "pneYear": 2024
@@ -355,6 +394,7 @@
     "park": "Panattoni Park Zdice",
     "category": "Sklad & logistika",
     "areaM2": 12259,
+    "yearBuilt": 2024,
     "penbClass": null,
     "pneKwhM2": 11.4,
     "pneYear": 2024
@@ -364,6 +404,7 @@
     "park": "Panattoni Park Chomutov North",
     "category": "Výroba",
     "areaM2": 14964,
+    "yearBuilt": 2023,
     "penbClass": "B",
     "pneKwhM2": 478.7,
     "pneYear": 2024
@@ -373,6 +414,7 @@
     "park": "Panattoni Park Týniště nad Orlicí",
     "category": "Sklad & logistika",
     "areaM2": 16644,
+    "yearBuilt": 2022,
     "penbClass": "C",
     "pneKwhM2": 18.8,
     "pneYear": 2024
@@ -382,6 +424,7 @@
     "park": "Panattoni Park Týniště nad Orlicí",
     "category": "Sklad & logistika",
     "areaM2": 9861,
+    "yearBuilt": 2022,
     "penbClass": "C",
     "pneKwhM2": 16.3,
     "pneYear": 2024
@@ -391,6 +434,7 @@
     "park": "Panattoni Park Pilsen West II",
     "category": "Výroba",
     "areaM2": 25135,
+    "yearBuilt": 2023,
     "penbClass": "B",
     "pneKwhM2": 53.9,
     "pneYear": 2024
@@ -400,6 +444,7 @@
     "park": "Panattoni Park Pilsen West II",
     "category": "Výroba",
     "areaM2": 36463,
+    "yearBuilt": 2023,
     "penbClass": "B",
     "pneKwhM2": 229.3,
     "pneYear": 2024
@@ -409,6 +454,7 @@
     "park": "Panattoni Park Prague Airport II",
     "category": "Sklad & logistika",
     "areaM2": 24776,
+    "yearBuilt": 2016,
     "penbClass": "C",
     "pneKwhM2": 40.3,
     "pneYear": 2024
@@ -418,6 +464,7 @@
     "park": "Panattoni Park Prague Airport II",
     "category": "Sklad & logistika",
     "areaM2": 21171,
+    "yearBuilt": 2019,
     "penbClass": null,
     "pneKwhM2": 26.3,
     "pneYear": 2024
@@ -427,6 +474,7 @@
     "park": "Panattoni Park Prague Airport II",
     "category": "Sklad & logistika",
     "areaM2": 24657,
+    "yearBuilt": 2018,
     "penbClass": null,
     "pneKwhM2": 17.8,
     "pneYear": 2024
@@ -436,6 +484,7 @@
     "park": "Panattoni Park Prague Airport II",
     "category": "Sklad & výroba",
     "areaM2": 6775,
+    "yearBuilt": 2020,
     "penbClass": null,
     "pneKwhM2": 32.7,
     "pneYear": 2024
@@ -445,6 +494,7 @@
     "park": "Panattoni Park Prague Airport II",
     "category": "Sklad & logistika",
     "areaM2": 1641,
+    "yearBuilt": 2021,
     "penbClass": null,
     "pneKwhM2": 37.8,
     "pneYear": 2024
@@ -454,6 +504,7 @@
     "park": "Panattoni Park Prague Airport II",
     "category": "Sklad & logistika",
     "areaM2": 23026,
+    "yearBuilt": 2019,
     "penbClass": null,
     "pneKwhM2": 88.3,
     "pneYear": 2024

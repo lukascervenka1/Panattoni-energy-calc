@@ -40,11 +40,14 @@ export function BuildingsTable({
 
       {open && (
         <div className="mt-4 overflow-x-auto">
-          <table className="w-full min-w-[420px] border-collapse text-sm">
+          <table className="w-full min-w-[520px] border-collapse text-sm">
             <thead>
               <tr className="border-b" style={{ borderColor: "var(--color-border-default)" }}>
                 <th className="px-2 py-2 text-left text-[11px] font-medium uppercase tracking-wide text-[var(--color-text-muted)]">
                   Park / typologie
+                </th>
+                <th className="px-2 py-2 text-right text-[11px] font-medium uppercase tracking-wide text-[var(--color-text-muted)]">
+                  Rok dokončení
                 </th>
                 <th className="px-2 py-2 text-left text-[11px] font-medium uppercase tracking-wide text-[var(--color-text-muted)]">
                   Třída
@@ -76,6 +79,9 @@ export function BuildingsTable({
                         {b.category}
                       </span>
                     </td>
+                    <td className="px-2 py-2 text-right text-[var(--color-text-muted)]">
+                      {b.yearBuilt}
+                    </td>
                     <td className="px-2 py-2">
                       {b.penbClass ? (
                         <span
@@ -99,8 +105,9 @@ export function BuildingsTable({
             </tbody>
           </table>
           <p className="mt-3 text-[11px] leading-relaxed text-[var(--color-text-muted)]">
-            Anonymizovaná data z interního portfolia Panattoni (naměřená spotřeba 2023–2024).
-            Jména nájemců a SPV nejsou zobrazena.
+            Anonymizovaná data z interního portfolia Panattoni. Hodnota kWh/m² je reálná
+            fakturovaná spotřeba elektřiny a plynu za rok 2023–2024, ne hodnota z průkazu
+            energetické náročnosti budovy (PENB). Jména nájemců a SPV nejsou zobrazena.
           </p>
         </div>
       )}
