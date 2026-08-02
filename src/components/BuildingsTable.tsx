@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Building, PenbClass } from "@/lib/types";
 import { formatNumber } from "@/lib/calc";
+import { useLocale } from "@/lib/LocaleContext";
 
 const CLASS_BADGE: Record<PenbClass, string> = {
   A: "bg-[#16a34a] text-white",
@@ -21,6 +22,7 @@ export function BuildingsTable({
   buildings: Building[];
   highlightClass: PenbClass;
 }) {
+  const { t, locale } = useLocale();
   const [open, setOpen] = useState(false);
   const sorted = [...buildings].sort((a, b) => a.pneKwhM2 - b.pneKwhM2);
 
@@ -33,7 +35,7 @@ export function BuildingsTable({
         aria-expanded={open}
       >
         <span className="text-sm font-medium">
-          Srovnatelné haly v portfoliu Panattoni ({buildings.length})
+          {t.buildingsTable.toggle} ({buildings.length})
         </span>
         <span className="text-[var(--color-text-muted)]">{open ? "−" : "+"}</span>
       </button>
@@ -44,25 +46,26 @@ export function BuildingsTable({
             <thead>
               <tr className="border-b" style={{ borderColor: "var(--color-border-default)" }}>
                 <th className="px-2 py-2 text-left text-[11px] font-medium uppercase tracking-wide text-[var(--color-text-muted)]">
-                  Park / typologie
+                  {t.buildingsTable.colPark}
                 </th>
                 <th className="px-2 py-2 text-right text-[11px] font-medium uppercase tracking-wide text-[var(--color-text-muted)]">
-                  Rok dokončení
+                  {t.buildingsTable.colYear}
                 </th>
                 <th className="px-2 py-2 text-left text-[11px] font-medium uppercase tracking-wide text-[var(--color-text-muted)]">
-                  Třída
+                  {t.buildingsTable.colClass}
                 </th>
                 <th className="px-2 py-2 text-right text-[11px] font-medium uppercase tracking-wide text-[var(--color-text-muted)]">
-                  kWh/m²
+                  {t.buildingsTable.colKwh}
                 </th>
                 <th className="px-2 py-2 text-right text-[11px] font-medium uppercase tracking-wide text-[var(--color-text-muted)]">
-                  Plocha m²
+                  {t.buildingsTable.colArea}
                 </th>
               </tr>
             </thead>
             <tbody>
               {sorted.map((b) => {
                 const hi = b.penbClass === highlightClass;
+                const category = t.buildingsTable.categories[b.category] ?? b.category;
                 return (
                   <tr
                     key={b.id}
@@ -73,10 +76,10 @@ export function BuildingsTable({
                     }}
                   >
                     <td className="px-2 py-2">
-                      {b.park ?? b.category}
+                      {b.park ?? category}
                       <br />
                       <span className="text-[11px] text-[var(--color-text-muted)]">
-                        {b.category}
+                        {category}
                       </span>
                     </td>
                     <td className="px-2 py-2 text-right text-[var(--color-text-muted)]">
@@ -94,10 +97,10 @@ export function BuildingsTable({
                       )}
                     </td>
                     <td className="px-2 py-2 text-right font-medium">
-                      {formatNumber(b.pneKwhM2)}
+                      {formatNumber(b.pneKwhM2, locale)}
                     </td>
                     <td className="px-2 py-2 text-right text-[var(--color-text-muted)]">
-                      {formatNumber(b.areaM2)}
+                      {formatNumber(b.areaM2, locale)}
                     </td>
                   </tr>
                 );
@@ -105,9 +108,7 @@ export function BuildingsTable({
             </tbody>
           </table>
           <p className="mt-3 text-[11px] leading-relaxed text-[var(--color-text-muted)]">
-            Anonymizovaná data z interního portfolia Panattoni. Hodnota kWh/m² je reálná
-            fakturovaná spotřeba elektřiny a plynu za rok 2023–2024, ne hodnota z průkazu
-            energetické náročnosti budovy (PENB). Jména nájemců a SPV nejsou zobrazena.
+            {t.buildingsTable.footnote}
           </p>
         </div>
       )}

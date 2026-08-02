@@ -1,8 +1,11 @@
 import type { CalculatorResult } from "@/lib/calc";
 import { formatNumber } from "@/lib/calc";
+import { useLocale } from "@/lib/LocaleContext";
 import { LeafIcon } from "./icons";
 
 export function KpiRow({ result }: { result: CalculatorResult }) {
+  const { t, locale } = useLocale();
+
   return (
     <div
       className="rounded-xl border border-[var(--color-border-default)] px-5 py-4 sm:p-5"
@@ -12,11 +15,11 @@ export function KpiRow({ result }: { result: CalculatorResult }) {
         <span style={{ color: "var(--color-accent)" }}>
           <LeafIcon className="h-3.5 w-3.5" />
         </span>
-        Snížení CO₂
+        {t.kpi.co2Label}
       </div>
       <p className="font-heading text-xl font-semibold tracking-[-0.02em] sm:text-2xl">
-        {formatNumber(result.annualCo2SavingsT)}{" "}
-        <span className="text-sm font-normal text-[var(--color-text-muted)]">t CO₂ / rok</span>
+        {formatNumber(result.annualCo2SavingsT, locale)}{" "}
+        <span className="text-sm font-normal text-[var(--color-text-muted)]">{t.kpi.co2Unit}</span>
       </p>
     </div>
   );

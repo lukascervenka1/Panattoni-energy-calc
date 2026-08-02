@@ -1,4 +1,5 @@
 import type { CalculatorConfig } from "./types";
+import type { Locale } from "./i18n";
 
 export interface CalculatorInputs {
   areaM2: number;
@@ -68,7 +69,7 @@ export function calculateSavings(
     referencePneKwhM2,
     reductionPct,
     annualSavingsEur,
-    annualSavingsEurPerM2: deltaKwh * priceBlend / inputs.areaM2,
+    annualSavingsEurPerM2: (deltaKwh * priceBlend) / inputs.areaM2,
     annualSavingsMwh: Math.round(deltaKwh / 1000),
     annualCo2SavingsT,
     fiveYearSavingsEur: annualSavingsEur * 5,
@@ -76,24 +77,32 @@ export function calculateSavings(
   };
 }
 
-export function formatNumber(n: number): string {
-  return Math.round(n).toLocaleString("cs-CZ");
+function intlLocale(locale: Locale): string {
+  return locale === "en" ? "en-GB" : "cs-CZ";
 }
 
-export function formatEur(n: number): string {
+export function formatNumber(n: number, locale: Locale = "cs"): string {
+  return Math.round(n).toLocaleString(intlLocale(locale));
+}
+
+export function formatEur(n: number, locale: Locale = "cs"): string {
   const rounded = Math.round(n);
   const abs = Math.abs(rounded);
+  const loc = intlLocale(locale);
   if (abs >= 1_000_000) {
-    return (
-      (rounded / 1_000_000).toLocaleString("cs-CZ", { maximumFractionDigits: 2 }) + " mil. €"
-    );
+    const value = (rounded / 1_000_000).toLocaleString(loc, { maximumFractionDigits: 2 });
+    return locale === "en" ? `${value} M €` : `${value} mil. €`;
   }
   if (abs >= 1_000) {
-    return (rounded / 1_000).toLocaleString("cs-CZ", { maximumFractionDigits: 1 }) + " tis. €";
+    const value = (rounded / 1_000).toLocaleString(loc, { maximumFractionDigits: 1 });
+    return locale === "en" ? `${value} k €` : `${value} tis. €`;
   }
-  return formatNumber(rounded) + " €";
+  return formatNumber(rounded, locale) + " €";
 }
 
-export function formatEurPerM2(n: number): string {
-  return n.toLocaleString("cs-CZ", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " €/m²";
+export function formatEurPerM2(n: number, locale: Locale = "cs"): string {
+  return (
+    n.toLocaleString(intlLocale(locale), { minimumFractionDigits: 1, maximumFractionDigits: 1 }) +
+    " €/m²"
+  );
 }

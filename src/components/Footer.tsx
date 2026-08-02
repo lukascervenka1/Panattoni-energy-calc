@@ -1,3 +1,6 @@
+"use client";
+
+import { useLocale } from "@/lib/LocaleContext";
 import { Logo } from "./Logo";
 import { Glow } from "./Glow";
 import { GlobeIcon, MailIcon, PhoneIcon, PinIcon } from "./icons";
@@ -35,6 +38,8 @@ function ContactRow({
 }
 
 export function Footer() {
+  const { t } = useLocale();
+
   return (
     <footer className="relative overflow-hidden bg-[var(--color-navy)]">
       <Glow />
@@ -43,34 +48,26 @@ export function Footer() {
           <div>
             <Logo height={16} />
             <p className="mt-3 max-w-xs text-xs leading-relaxed text-white/50">
-              Společnost Panattoni vede v žebříčku nejaktivnějších průmyslových developerů již
-              osmý rok. Za poslední tři roky jsme dodali přes 14 milionů m² plochy dokončených
-              průmyslových prostor za využití kapitálu ve výši cca 8,2 miliardy €.
+              {t.footer.credibility}
             </p>
           </div>
 
           <div className="flex flex-col gap-2">
-            <ContactRow icon={<PinIcon className="h-3.5 w-3.5" />}>
-              V Celnici 1034/6, 110 00 Praha 1
-            </ContactRow>
+            <ContactRow icon={<PinIcon className="h-3.5 w-3.5" />}>{t.footer.address}</ContactRow>
             <ContactRow icon={<PhoneIcon className="h-3.5 w-3.5" />} href="tel:+420226220550">
               +420 226 220 550
             </ContactRow>
             <ContactRow icon={<MailIcon className="h-3.5 w-3.5" />} href="mailto:czinfo@panattoni.com">
               czinfo@panattoni.com
             </ContactRow>
-            <ContactRow
-              icon={<GlobeIcon className="h-3.5 w-3.5" />}
-              href="https://panattonieurope.com/cz-cz"
-            >
-              panattonieurope.com
+            <ContactRow icon={<GlobeIcon className="h-3.5 w-3.5" />} href={t.footer.websiteUrl}>
+              {t.footer.website}
             </ContactRow>
           </div>
         </div>
 
         <p className="mt-5 border-t border-white/10 pt-4 text-[11px] text-white/50">
-          © {new Date().getFullYear()} Panattoni. Kalkulačka slouží pro orientační odhad, nejde o
-          závaznou nabídku.
+          © {new Date().getFullYear()} Panattoni. {t.footer.copyright}
         </p>
       </div>
     </footer>

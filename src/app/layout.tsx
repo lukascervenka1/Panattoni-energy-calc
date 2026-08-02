@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bai_Jamjuree, Rubik } from "next/font/google";
+import { LocaleProvider } from "@/lib/LocaleContext";
 import "./globals.css";
 
 const baiJamjuree = Bai_Jamjuree({
@@ -31,7 +32,7 @@ export default function RootLayout({
       className={`${baiJamjuree.variable} ${rubik.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--color-bg)] text-[var(--color-text)]">
-        {children}
+        <LocaleProvider>{children}</LocaleProvider>
       </body>
     </html>
   );

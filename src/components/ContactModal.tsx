@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
+import { useLocale } from "@/lib/LocaleContext";
 import { Logo } from "./Logo";
 import { Glow } from "./Glow";
 import { ArrowRightIcon, CloseIcon } from "./icons";
 
 export function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { t } = useLocale();
+
   useEffect(() => {
     if (!open) return;
 
@@ -53,7 +56,7 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
         <button
           type="button"
           onClick={onClose}
-          aria-label="Zavřít"
+          aria-label={t.modal.close}
           className="absolute right-2 top-2 z-10 flex h-11 w-11 items-center justify-center rounded-full text-white/60 transition-colors hover:bg-white/10 hover:text-white"
         >
           <CloseIcon className="h-4 w-4" />
@@ -65,11 +68,9 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
             id="contact-modal-title"
             className="mt-6 font-heading text-2xl font-semibold tracking-[-0.02em] text-white sm:text-3xl"
           >
-            Spojte se s naším týmem
+            {t.modal.title}
           </h2>
-          <p className="mt-2 text-sm text-white/70">
-            Probereme reálnou úsporu pro vaši halu a připravíme nabídku na míru.
-          </p>
+          <p className="mt-2 text-sm text-white/70">{t.cta.subtitle}</p>
 
           <div className="mt-6 flex flex-col gap-3">
             <a

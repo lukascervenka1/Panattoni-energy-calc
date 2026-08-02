@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Building, CalculatorConfig, PenbClass } from "@/lib/types";
 import { calculateSavings, formatNumber, suggestConsumptionSplit } from "@/lib/calc";
+import { useLocale } from "@/lib/LocaleContext";
 import { Hero } from "./Hero";
 import { CardHeader } from "./CardHeader";
 import { ClassPicker } from "./ClassPicker";
@@ -24,6 +25,7 @@ export function CalculatorPage({
   buildings: Building[];
   config: CalculatorConfig;
 }) {
+  const { t, locale } = useLocale();
   const [cls, setCls] = useState<PenbClass>(DEFAULT_CLASS);
   const [areaM2, setAreaM2] = useState(DEFAULT_AREA);
   const initialSplit = suggestConsumptionSplit(config.classDefaultsKwhM2[DEFAULT_CLASS], config);
@@ -38,6 +40,7 @@ export function CalculatorPage({
   }
 
   const result = calculateSavings({ areaM2, eleKwhM2, gasKwhM2 }, config);
+  const fmt = (n: number) => formatNumber(n, locale);
 
   return (
     <>
@@ -49,48 +52,46 @@ export function CalculatorPage({
             style={{ borderColor: "var(--color-border-default)", background: "var(--color-surface)" }}
           >
             <div className="p-5 sm:p-6">
-              <CardHeader step={1} label="Třída PENB vaší stávající budovy" />
+              <CardHeader step={1} label={t.step1Label} />
               <ClassPicker config={config} value={cls} onChange={handleClassChange} />
             </div>
 
             <div className="border-t p-5 sm:p-6" style={{ borderColor: "var(--color-border-default)" }}>
-              <CardHeader step={2} label="Parametry budovy" />
+              <CardHeader step={2} label={t.step2Label} />
               <div className="flex flex-col gap-5">
                 <SliderField
-                  label="Pronajatá plocha"
+                  label={t.sliders.area}
                   value={areaM2}
                   min={500}
                   max={200000}
                   step={500}
                   unit="m²"
                   onChange={setAreaM2}
-                  formatValue={formatNumber}
+                  formatValue={fmt}
                 />
                 <SliderField
-                  label="Spotřeba ELE"
+                  label={t.sliders.ele}
                   value={eleKwhM2}
                   min={0}
                   max={600}
                   step={5}
                   unit="kWh/m²"
                   onChange={setEleKwhM2}
-                  formatValue={formatNumber}
+                  formatValue={fmt}
                 />
                 <SliderField
-                  label="Spotřeba plyn"
+                  label={t.sliders.gas}
                   value={gasKwhM2}
                   min={0}
                   max={400}
                   step={5}
                   unit="kWh/m²"
                   onChange={setGasKwhM2}
-                  formatValue={formatNumber}
+                  formatValue={fmt}
                 />
               </div>
               <p className="mt-4 text-[11px] leading-relaxed text-[var(--color-text-muted)]">
-                Výchozí hodnoty spotřeby jsou odhad na základě zvolené třídy PENB — jakmile znáte
-                skutečnou spotřebu budovy z vyúčtování, upravte posuvníky podle ní pro přesnější
-                výsledek.
+                {t.sliders.helper}
               </p>
             </div>
           </section>
