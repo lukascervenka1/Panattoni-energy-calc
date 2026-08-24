@@ -2,23 +2,7 @@
 
 import { useId, useState } from "react";
 import type { Locale } from "@/lib/i18n";
-
-/** Accepts what people actually type: "1 200", "1 200,5", "1200.5", "1.200". */
-function parseTyped(raw: string): number | null {
-  const cleaned = raw
-    .replace(/\s| | /g, "")
-    .replace(",", ".")
-    .trim();
-  if (cleaned === "") return null;
-  const n = Number(cleaned);
-  return Number.isFinite(n) ? n : null;
-}
-
-function formatForLocale(n: number, locale: Locale, decimals: number): string {
-  return n.toLocaleString(locale === "en" ? "en-GB" : "cs-CZ", {
-    maximumFractionDigits: decimals,
-  });
-}
+import { clampToRange, formatForLocale, parseTyped } from "@/lib/numberInput";
 
 export function SliderField({
   label,
@@ -65,7 +49,7 @@ export function SliderField({
     const parsed = parseTyped(raw);
     if (parsed === null) return;
     const canonical = fromDisplay ? fromDisplay(parsed) : parsed;
-    onChange(Math.min(max, Math.max(min, canonical)));
+    onChange(clampToRange(canonical, min, max));
   }
 
   return (
@@ -80,7 +64,7 @@ export function SliderField({
         max={max}
         step={step}
         value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
+        onChange={(e) => onChange(clampToRange(Number(e.target.value), min, max))}
         aria-label={label}
       />
 
@@ -107,9 +91,7 @@ export function SliderField({
           />
           <span className="flex-shrink-0 text-[var(--color-text-muted)]">{unit}</span>
         </div>
-        {hint && (
-          <span className="text-[11px] text-[var(--color-text-muted)]">{hint}</span>
-        )}
+        {hint && <span className="text-[11px] text-[var(--color-text-muted)]">{hint}</span>}
       </div>
     </div>
   );

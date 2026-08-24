@@ -121,6 +121,27 @@ Pro rychlou orientaci, celý výpočet roční úspory v jednom výrazu:
 kde `smíšená_cena` je vážený průměr cen ELE a plynu podle jejich podílu na aktuální
 spotřebě.
 
+## Ověření výpočtu
+
+Vzorec je pokrytý testy — spustíte je příkazem:
+
+```
+npm test
+```
+
+Testy běží na vestavěném test runneru Node.js (žádné další závislosti), zdroj je
+v `tests/`:
+
+| Soubor | Co ověřuje |
+|---|---|
+| `tests/calc.test.ts` | Vzorec proti ručně dopočítaným hodnotám (ne přepočtem z kódu), rozpad dle třídy PENB, vážení ceny a emisí, chování na hranici referenční hodnoty, invarianty (nezávislost €/m² na ploše, linearita, monotonie) a formátování čísel. |
+| `tests/csv.test.ts` | Parser CSV z Google Sheetu — uvozovky, čárky uvnitř polí, CRLF, chybějící sloupce. |
+| `tests/data.test.ts` | Shodu `data/*.json` se šablonou v `reference/google-sheet-template/*.csv` (obojí se udržuje ručně, takže hrozí rozjetí) a rozsahy hodnot. |
+| `tests/security.test.ts` | Odolnost proti nepřátelským datům z Google Sheetu a proti tomu, co může návštěvník napsat do polí — plus kontrolu bezpečnostních hlaviček. |
+
+Dva referenční příklady (třída C a D při 15 000 m²) jsou navíc ověřené proti
+číslům, která reálně zobrazuje běžící aplikace.
+
 ## Kde se dají hodnoty měnit
 
 Všechny konstanty v krocích 2, 4 a 6 (ceny, emisní faktory, mix, referenční hodnota,
