@@ -18,6 +18,14 @@ Uživatel zadává tři hodnoty (viz [`SliderField`](src/components/SliderField.
 `eleKwhM2` a `gasKwhM2` se přednastaví podle zvolené třídy PENB (krok 2 níže), ale
 uživatel je může kdykoli přepsat skutečnou naměřenou spotřebou.
 
+Pole elektřiny a plynu se v UI zobrazují a editují v **MWh/rok** (tak, jak spotřebu
+lidé znají z vyúčtování) — kalkulačka hodnotu při zápisu přepočte na kanonickou
+jednotku kWh/(m²·rok) pomocí aktuální `areaM2` a pod polem zobrazí dopočtenou
+intenzitu jako drobný hint. Vnitřně (vstupy do vzorců níže) se vždy pracuje jen s
+`eleKwhM2` / `gasKwhM2` v kWh/(m²·rok) — přepočet je čistě zobrazovací.
+*Funkce: [`SliderField`](src/components/SliderField.tsx), `toMwh`/`fromMwh` v
+[`CalculatorPage.tsx`](src/components/CalculatorPage.tsx).*
+
 ## 2. Výchozí odhad spotřeby podle třídy PENB
 
 Když uživatel klikne na třídu A–G, kalkulačka nejdřív vezme celkový odhad spotřeby pro
@@ -29,9 +37,10 @@ eleKwhM2  = round( classDefaultsKwhM2[třída] × eleShareDefault / 5 ) × 5
 gasKwhM2  = round( classDefaultsKwhM2[třída] × gasShareDefault / 5 ) × 5
 ```
 
-kde `eleShareDefault = 0,80` a `gasShareDefault = 0,20` (naměřený mix portfolia
-skladových hal Panattoni za rok 2024). Zaokrouhluje se na nejbližších 5 kWh/m², aby
-hodnoty na posuvnících seděly na krok.
+kde `eleShareDefault = 0,30` a `gasShareDefault = 0,70` (metodika platná od 08/2026;
+odpovídá plynem dominovanému mixu naměřenému v portfoliu — 2024 vychází ELE 46 % /
+plyn 54 %). Zaokrouhluje se na nejbližších 5 kWh/m², aby hodnoty na posuvnících
+seděly na krok.
 
 *Funkce: [`suggestConsumptionSplit()`](src/lib/calc.ts).*
 

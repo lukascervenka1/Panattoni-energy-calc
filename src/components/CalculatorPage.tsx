@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Building, CalculatorConfig, PenbClass } from "@/lib/types";
+import type { Benchmark, CalculatorConfig, PenbClass } from "@/lib/types";
 import { calculateSavings, formatNumber, suggestConsumptionSplit } from "@/lib/calc";
 import { useLocale } from "@/lib/LocaleContext";
 import { Hero } from "./Hero";
@@ -11,7 +11,7 @@ import { SliderField } from "./SliderField";
 import { ResultsHero } from "./ResultsHero";
 import { KpiRow } from "./KpiRow";
 import { CtaBanner } from "./CtaBanner";
-import { BuildingsTable } from "./BuildingsTable";
+import { BenchmarkHalls } from "./BenchmarkHalls";
 import { Methodology } from "./Methodology";
 import { Footer } from "./Footer";
 
@@ -19,10 +19,10 @@ const DEFAULT_CLASS: PenbClass = "C";
 const DEFAULT_AREA = 15000;
 
 export function CalculatorPage({
-  buildings,
+  benchmarks,
   config,
 }: {
-  buildings: Building[];
+  benchmarks: Benchmark[];
   config: CalculatorConfig;
 }) {
   const { t, locale } = useLocale();
@@ -42,6 +42,11 @@ export function CalculatorPage({
   const result = calculateSavings({ areaM2, eleKwhM2, gasKwhM2 }, config);
   const fmt = (n: number) => formatNumber(n, locale);
 
+  // Tenants read totals off an invoice (MWh/year), not intensity, so the editable
+  // field speaks MWh while the calculation keeps working in kWh/m².
+  const toMwh = (kwhM2: number) => (kwhM2 * areaM2) / 1000;
+  const fromMwh = (mwh: number) => (mwh * 1000) / areaM2;
+
   return (
     <>
       <Hero />
@@ -53,11 +58,6 @@ export function CalculatorPage({
           >
             <div className="p-5 sm:p-6">
               <CardHeader step={1} label={t.step1Label} />
-              <ClassPicker config={config} value={cls} onChange={handleClassChange} />
-            </div>
-
-            <div className="border-t p-5 sm:p-6" style={{ borderColor: "var(--color-border-default)" }}>
-              <CardHeader step={2} label={t.step2Label} />
               <div className="flex flex-col gap-5">
                 <SliderField
                   label={t.sliders.area}
@@ -67,7 +67,7 @@ export function CalculatorPage({
                   step={500}
                   unit="m²"
                   onChange={setAreaM2}
-                  formatValue={fmt}
+                  locale={locale}
                 />
                 <SliderField
                   label={t.sliders.ele}
@@ -75,9 +75,13 @@ export function CalculatorPage({
                   min={0}
                   max={600}
                   step={5}
-                  unit="kWh/m²"
+                  unit={t.sliders.mwhUnit}
                   onChange={setEleKwhM2}
-                  formatValue={fmt}
+                  locale={locale}
+                  decimals={1}
+                  toDisplay={toMwh}
+                  fromDisplay={fromMwh}
+                  hint={`${fmt(eleKwhM2)} kWh/m²`}
                 />
                 <SliderField
                   label={t.sliders.gas}
@@ -85,13 +89,25 @@ export function CalculatorPage({
                   min={0}
                   max={400}
                   step={5}
-                  unit="kWh/m²"
+                  unit={t.sliders.mwhUnit}
                   onChange={setGasKwhM2}
-                  formatValue={fmt}
+                  locale={locale}
+                  decimals={1}
+                  toDisplay={toMwh}
+                  fromDisplay={fromMwh}
+                  hint={`${fmt(gasKwhM2)} kWh/m²`}
                 />
               </div>
               <p className="mt-4 text-[11px] leading-relaxed text-[var(--color-text-muted)]">
                 {t.sliders.helper}
+              </p>
+            </div>
+
+            <div className="border-t p-5 sm:p-6" style={{ borderColor: "var(--color-border-default)" }}>
+              <CardHeader step={2} label={t.step2Label} />
+              <ClassPicker value={cls} onChange={handleClassChange} />
+              <p className="mt-4 text-[11px] leading-relaxed text-[var(--color-text-muted)]">
+                {t.classHelper}
               </p>
             </div>
           </section>
@@ -106,14 +122,13 @@ export function CalculatorPage({
 
           <CtaBanner />
 
+          <BenchmarkHalls benchmarks={benchmarks} />
+
           <div
             className="overflow-hidden rounded-xl border"
             style={{ borderColor: "var(--color-border-default)", background: "var(--color-surface)" }}
           >
             <div className="p-5 sm:p-6">
-              <BuildingsTable buildings={buildings} highlightClass={cls} />
-            </div>
-            <div className="border-t p-5 sm:p-6" style={{ borderColor: "var(--color-border-default)" }}>
               <Methodology config={config} />
             </div>
           </div>

@@ -30,8 +30,13 @@ npm run dev
 Otevřete [http://localhost:3000](http://localhost:3000).
 
 Bez nastavených proměnných prostředí aplikace běží na vestavěných datech v
-`/data/buildings.json` a `/data/config.json` (odvozeno z interního Excelu, jména
+`/data/benchmarks.json` a `/data/config.json` (odvozeno z interního Excelu, jména
 nájemců a SPV odstraněna).
+
+`benchmarks.json` obsahuje **jen 3 vybrané nejnovější haly**, které se klientovi
+ukazují jako benchmark — ne celé portfolio. Podmínkou pro zařazení je celý rok
+naměřené fakturované spotřeby: první kalendářní rok po dokončení haly je vždy
+neúplný a vychází z něj nereálně nízká čísla.
 
 ## Napojení na Google Sheet (živá data)
 

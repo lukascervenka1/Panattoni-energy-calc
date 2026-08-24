@@ -1,6 +1,6 @@
 "use client";
 
-import type { CalculatorConfig, PenbClass } from "@/lib/types";
+import type { PenbClass } from "@/lib/types";
 
 const CLASSES: PenbClass[] = ["A", "B", "C", "D", "E", "F", "G"];
 
@@ -24,18 +24,10 @@ const CLASS_TEXT_ON: Record<PenbClass, string> = {
   G: "#ffffff",
 };
 
-function boundaryLabel(config: CalculatorConfig, cls: PenbClass): string {
-  const boundary = config.classBoundariesKwhM2[cls];
-  if (boundary === null || boundary === undefined) return `>${config.classBoundariesKwhM2.F}`;
-  return `≤${boundary}`;
-}
-
 export function ClassPicker({
-  config,
   value,
   onChange,
 }: {
-  config: CalculatorConfig;
   value: PenbClass;
   onChange: (c: PenbClass) => void;
 }) {
@@ -49,7 +41,7 @@ export function ClassPicker({
             type="button"
             onClick={() => onChange(c)}
             aria-pressed={active}
-            className="flex aspect-square min-h-11 flex-col items-center justify-center gap-0.5 rounded-lg border text-lg font-semibold transition-colors duration-150"
+            className="flex aspect-square min-h-11 items-center justify-center rounded-lg border text-lg font-semibold transition-colors duration-150"
             style={{
               borderColor: active ? "transparent" : "var(--color-border-default)",
               background: active ? CLASS_COLORS[c] : "var(--color-surface)",
@@ -57,9 +49,6 @@ export function ClassPicker({
             }}
           >
             {c}
-            <span className="font-mono text-[10px] font-normal opacity-70">
-              {boundaryLabel(config, c)}
-            </span>
           </button>
         );
       })}

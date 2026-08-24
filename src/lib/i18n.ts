@@ -8,10 +8,13 @@ export interface Translations {
     navLabel: string;
     title: string;
     subtitle: string;
+    scope: string;
   };
   step1Label: string;
   step2Label: string;
+  classHelper: string;
   sliders: {
+    mwhUnit: string;
     area: string;
     ele: string;
     gas: string;
@@ -43,15 +46,12 @@ export interface Translations {
     title: string;
     close: string;
   };
-  buildingsTable: {
-    toggle: string;
-    colPark: string;
-    colYear: string;
-    colClass: string;
-    colKwh: string;
-    colArea: string;
-    footnote: string;
-    categories: Record<string, string>;
+  benchmarks: {
+    title: string;
+    subtitle: string;
+    unit: string;
+    area: string;
+    elecShare: string;
   };
   methodology: {
     toggle: string;
@@ -84,15 +84,19 @@ export const translations: Record<Locale, Translations> = {
       title: "Kolik ušetříte v energeticky úspornější hale?",
       subtitle:
         "Zadejte parametry vaší současné budovy a porovnejte roční náklady na energie s nově budovanými halami od Panattoni.",
+      scope: "Kalkulačka platí pro skladové haly, ne pro výrobní provozy.",
     },
-    step1Label: "Třída PENB vaší stávající budovy",
-    step2Label: "Parametry budovy",
+    step1Label: "Parametry budovy",
+    step2Label: "Neznáte spotřebu? Vyberte třídu PENB",
+    classHelper:
+      "Zvolením třídy PENB doplníme odhad spotřeby do polí výše. Pokud znáte skutečné hodnoty z vyúčtování, zadejte je raději přímo.",
     sliders: {
+      mwhUnit: "MWh/rok",
       area: "Pronajatá plocha",
-      ele: "Spotřeba ELE",
-      gas: "Spotřeba plyn",
+      ele: "Spotřeba elektřiny",
+      gas: "Spotřeba plynu",
       helper:
-        "Výchozí hodnoty spotřeby jsou odhad na základě zvolené třídy PENB — pokud znáte skutečnou spotřebu budovy z vyúčtování, upravte posuvníky podle ní pro přesnější výsledek.",
+        "Hodnoty můžete napsat přímo — spotřebu zadávejte v MWh za rok, tak jak ji najdete na vyúčtování. Pod polem se dopočítá spotřeba na m².",
     },
     results: {
       optimalEyebrow: "Vaše budova je na špičkové úrovni",
@@ -121,20 +125,12 @@ export const translations: Record<Locale, Translations> = {
       title: "Spojte se s naším týmem",
       close: "Zavřít",
     },
-    buildingsTable: {
-      toggle: "Srovnatelné haly v portfoliu Panattoni",
-      colPark: "Park / typologie",
-      colYear: "Rok dokončení",
-      colClass: "Třída",
-      colKwh: "kWh/m²",
-      colArea: "Plocha m²",
-      footnote:
-        "Anonymizovaná data z interního portfolia Panattoni. Hodnota kWh/m² je reálná fakturovaná spotřeba elektřiny a plynu za rok 2023–2024, ne hodnota z průkazu energetické náročnosti budovy (PENB). Jména nájemců a SPV nejsou zobrazena.",
-      categories: {
-        "Sklad & logistika": "Sklad & logistika",
-        Výroba: "Výroba",
-        "Sklad & výroba": "Sklad & výroba",
-      },
+    benchmarks: {
+      title: "Naše nejúspornější haly",
+      subtitle: "Takhle nízkou spotřebu dnes dosahují skladové haly Panattoni v běžném provozu.",
+      unit: "kWh/m²·rok",
+      area: "Plocha",
+      elecShare: "Podíl elektřiny",
     },
     methodology: {
       toggle: "Zdroje a metodika výpočtu",
@@ -172,15 +168,19 @@ export const translations: Record<Locale, Translations> = {
       title: "How much could you save in a more energy-efficient warehouse?",
       subtitle:
         "Enter your current building's parameters and compare annual energy costs with newly built Panattoni halls.",
+      scope: "This calculator applies to warehouse halls, not manufacturing facilities.",
     },
-    step1Label: "PENB energy class of your current building",
-    step2Label: "Building parameters",
+    step1Label: "Building parameters",
+    step2Label: "Don't know your consumption? Pick your PENB class",
+    classHelper:
+      "Picking a PENB class fills the fields above with an estimate. If you know the actual figures from your bills, enter those instead.",
     sliders: {
+      mwhUnit: "MWh/yr",
       area: "Leased area",
       ele: "Electricity consumption",
       gas: "Gas consumption",
       helper:
-        "Default consumption values are estimated from the selected PENB class — if you know the building's actual consumption from your bills, adjust the sliders accordingly for a more accurate result.",
+        "You can type the values directly — enter consumption in MWh per year, as it appears on your bills. The per-m² figure is calculated below each field.",
     },
     results: {
       optimalEyebrow: "Your building is already best-in-class",
@@ -209,20 +209,12 @@ export const translations: Record<Locale, Translations> = {
       title: "Get in touch with our team",
       close: "Close",
     },
-    buildingsTable: {
-      toggle: "Comparable buildings in the Panattoni portfolio",
-      colPark: "Park / type",
-      colYear: "Completion year",
-      colClass: "Class",
-      colKwh: "kWh/m²",
-      colArea: "Area m²",
-      footnote:
-        "Anonymized data from Panattoni's internal portfolio. The kWh/m² figure is real billed electricity and gas consumption for 2023–2024, not the value declared on the building's energy performance certificate (PENB). Tenant and SPV names are not shown.",
-      categories: {
-        "Sklad & logistika": "Warehouse & logistics",
-        Výroba: "Manufacturing",
-        "Sklad & výroba": "Warehouse & manufacturing",
-      },
+    benchmarks: {
+      title: "Our most efficient halls",
+      subtitle: "This is the consumption Panattoni warehouses achieve in everyday operation.",
+      unit: "kWh/m²·yr",
+      area: "Area",
+      elecShare: "Electricity share",
     },
     methodology: {
       toggle: "Sources & calculation methodology",

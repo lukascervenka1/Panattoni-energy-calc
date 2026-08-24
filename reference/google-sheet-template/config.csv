@@ -1,11 +1,11 @@
 key,value,note
-ele_price_eur_kwh,0.09,Cena elektřiny v EUR/kWh (průměr portfolia 2024)
-gas_price_eur_kwh,0.042,Cena zemního plynu v EUR/kWh (průměr portfolia 2024)
-ele_co2_t_per_kwh,0.00036,"Emisní faktor elektřiny, t CO2 / kWh (ČR mix, ERÚ/ČHMÚ)"
-gas_co2_t_per_kwh,0.000202,"Emisní faktor zemního plynu, t CO2 / kWh (MPO/IPCC)"
-ele_share_default,0.8,Podíl elektřiny na výchozím odhadu spotřeby (0-1)
-gas_share_default,0.2,Podíl plynu na výchozím odhadu spotřeby (0-1)
-reference_pne_kwh_m2,30,"Referenční spotřeba nejúspornější čtvrtiny portfolia, kWh/(m2.rok)"
+ele_price_eur_kwh,0.09,Cena elektřiny v EUR/kWh
+gas_price_eur_kwh,0.042,Cena zemního plynu v EUR/kWh
+ele_co2_t_per_kwh,0.00036,"Emisní faktor elektřiny, t CO2 / kWh"
+gas_co2_t_per_kwh,0.000202,"Emisní faktor zemního plynu, t CO2 / kWh"
+ele_share_default,0.3,Podíl elektřiny na výchozím odhadu spotřeby (0-1)
+gas_share_default,0.7,Podíl plynu na výchozím odhadu spotřeby (0-1)
+reference_pne_kwh_m2,30,"Referenční spotřeba, kWh/(m2.rok)"
 class_default_a,40,"Výchozí odhad celkové spotřeby pro třídu A, kWh/(m2.rok)"
 class_default_b,55,"Výchozí odhad celkové spotřeby pro třídu B, kWh/(m2.rok)"
 class_default_c,90,"Výchozí odhad celkové spotřeby pro třídu C, kWh/(m2.rok)"
@@ -13,10 +13,10 @@ class_default_d,160,"Výchozí odhad celkové spotřeby pro třídu D, kWh/(m2.r
 class_default_e,250,"Výchozí odhad celkové spotřeby pro třídu E, kWh/(m2.rok)"
 class_default_f,380,"Výchozí odhad celkové spotřeby pro třídu F, kWh/(m2.rok)"
 class_default_g,550,"Výchozí odhad celkové spotřeby pro třídu G, kWh/(m2.rok)"
-class_boundary_a,75,"Horní hranice třídy A zobrazená v UI, kWh/(m2.rok) (prázdné = bez horní hranice)"
-class_boundary_b,143,"Horní hranice třídy B zobrazená v UI, kWh/(m2.rok) (prázdné = bez horní hranice)"
-class_boundary_c,200,"Horní hranice třídy C zobrazená v UI, kWh/(m2.rok) (prázdné = bez horní hranice)"
-class_boundary_d,350,"Horní hranice třídy D zobrazená v UI, kWh/(m2.rok) (prázdné = bez horní hranice)"
-class_boundary_e,500,"Horní hranice třídy E zobrazená v UI, kWh/(m2.rok) (prázdné = bez horní hranice)"
-class_boundary_f,650,"Horní hranice třídy F zobrazená v UI, kWh/(m2.rok) (prázdné = bez horní hranice)"
-class_boundary_g,,"Horní hranice třídy G zobrazená v UI, kWh/(m2.rok) (prázdné = bez horní hranice)"
+class_boundary_a,75,"Horní hranice třídy A, kWh/(m2.rok) (prázdné = bez horní hranice)"
+class_boundary_b,143,"Horní hranice třídy B, kWh/(m2.rok) (prázdné = bez horní hranice)"
+class_boundary_c,200,"Horní hranice třídy C, kWh/(m2.rok) (prázdné = bez horní hranice)"
+class_boundary_d,350,"Horní hranice třídy D, kWh/(m2.rok) (prázdné = bez horní hranice)"
+class_boundary_e,500,"Horní hranice třídy E, kWh/(m2.rok) (prázdné = bez horní hranice)"
+class_boundary_f,650,"Horní hranice třídy F, kWh/(m2.rok) (prázdné = bez horní hranice)"
+class_boundary_g,,"Horní hranice třídy G, kWh/(m2.rok) (prázdné = bez horní hranice)"

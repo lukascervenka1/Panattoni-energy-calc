@@ -1,13 +1,13 @@
 import "server-only";
 import { parseCsvRecords } from "./csv";
-import type { Building, CalculatorConfig, DataSourceStatus, PenbClass } from "./types";
-import fallbackBuildingsJson from "../../data/buildings.json";
+import type { Benchmark, CalculatorConfig, DataSourceStatus, PenbClass } from "./types";
+import fallbackBenchmarksJson from "../../data/benchmarks.json";
 import fallbackConfigJson from "../../data/config.json";
 
 const REVALIDATE_SECONDS = 300; // 5 min — sheet edits should show up without a redeploy
 const PENB_CLASSES: PenbClass[] = ["A", "B", "C", "D", "E", "F", "G"];
 
-const fallbackBuildings = fallbackBuildingsJson as unknown as Building[];
+const fallbackBenchmarks = fallbackBenchmarksJson as unknown as Benchmark[];
 const fallbackConfig = fallbackConfigJson as unknown as CalculatorConfig;
 
 function num(value: string | undefined, fallback: number): number {
@@ -15,11 +15,6 @@ function num(value: string | undefined, fallback: number): number {
   const normalized = value.replace(",", ".").trim();
   const parsed = Number(normalized);
   return Number.isFinite(parsed) ? parsed : fallback;
-}
-
-function toPenbClass(raw: string | null | undefined): PenbClass | null {
-  const c = (raw ?? "").trim().toUpperCase();
-  return (PENB_CLASSES as string[]).includes(c) ? (c as PenbClass) : null;
 }
 
 async function fetchCsv(url: string): Promise<Record<string, string>[] | null> {
@@ -34,24 +29,26 @@ async function fetchCsv(url: string): Promise<Record<string, string>[] | null> {
   }
 }
 
-function parseBuildings(records: Record<string, string>[]): Building[] {
+function parseBenchmarks(records: Record<string, string>[]): Benchmark[] {
   return records
-    .map((r): Building | null => {
+    .map((r): Benchmark | null => {
       const areaM2 = num(r.area_m2, NaN);
       const pneKwhM2 = num(r.pne_kwh_m2, NaN);
-      if (!r.id || !Number.isFinite(areaM2) || !Number.isFinite(pneKwhM2)) return null;
+      if (!r.id || !Number.isFinite(areaM2) || !Number.isFinite(pneKwhM2)) {
+        return null;
+      }
       return {
         id: r.id,
-        park: r.park?.trim() || null,
+        park: r.park?.trim() || "",
         category: r.category?.trim() || "Sklad & logistika",
         areaM2,
         yearBuilt: num(r.year_built, 0),
-        penbClass: toPenbClass(r.penb_class),
         pneKwhM2,
-        pneYear: num(r.pne_year, 2024),
+        elecSharePct: num(r.elec_share_pct, 0),
+        pneYear: num(r.pne_year, 2025),
       };
     })
-    .filter((b): b is Building => b !== null);
+    .filter((b): b is Benchmark => b !== null);
 }
 
 function parseConfig(records: Record<string, string>[]): CalculatorConfig {
@@ -86,23 +83,23 @@ function parseConfig(records: Record<string, string>[]): CalculatorConfig {
 }
 
 export interface CalculatorData {
-  buildings: Building[];
+  benchmarks: Benchmark[];
   config: CalculatorConfig;
   status: DataSourceStatus;
 }
 
 export async function getCalculatorData(): Promise<CalculatorData> {
-  const buildingsUrl = process.env.SHEETS_BUILDINGS_CSV_URL;
+  const benchmarksUrl = process.env.SHEETS_BUILDINGS_CSV_URL;
   const configUrl = process.env.SHEETS_CONFIG_CSV_URL;
 
-  let buildings: Building[] | null = null;
+  let benchmarks: Benchmark[] | null = null;
   let config: CalculatorConfig | null = null;
 
-  if (buildingsUrl) {
-    const records = await fetchCsv(buildingsUrl);
+  if (benchmarksUrl) {
+    const records = await fetchCsv(benchmarksUrl);
     if (records) {
-      const parsed = parseBuildings(records);
-      if (parsed.length > 0) buildings = parsed;
+      const parsed = parseBenchmarks(records);
+      if (parsed.length > 0) benchmarks = parsed;
     }
   }
 
@@ -111,15 +108,15 @@ export async function getCalculatorData(): Promise<CalculatorData> {
     if (records) config = parseConfig(records);
   }
 
-  const usedSheets = buildings !== null || config !== null;
+  const usedSheets = benchmarks !== null || config !== null;
 
   return {
-    buildings: buildings ?? fallbackBuildings,
+    benchmarks: benchmarks ?? fallbackBenchmarks,
     config: config ?? fallbackConfig,
     status: {
       source: usedSheets ? "sheets" : "fallback",
       fetchedAt: new Date().toISOString(),
-      buildingCount: (buildings ?? fallbackBuildings).length,
+      benchmarkCount: (benchmarks ?? fallbackBenchmarks).length,
     },
   };
 }

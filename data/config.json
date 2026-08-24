@@ -3,8 +3,8 @@
   "gasPriceEurKwh": 0.042,
   "eleCo2TPerKwh": 0.00036,
   "gasCo2TPerKwh": 0.000202,
-  "eleShareDefault": 0.80,
-  "gasShareDefault": 0.20,
+  "eleShareDefault": 0.30,
+  "gasShareDefault": 0.70,
   "referencePneKwhM2": 30,
   "classDefaultsKwhM2": {
     "A": 40,

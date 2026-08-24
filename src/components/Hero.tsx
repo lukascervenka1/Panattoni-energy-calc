@@ -35,6 +35,9 @@ export function Hero() {
         <p className="mt-4 max-w-md text-sm leading-relaxed text-[#a7adc0] sm:text-base">
           {t.hero.subtitle}
         </p>
+        <p className="mt-5 inline-block rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white/80">
+          {t.hero.scope}
+        </p>
       </div>
     </div>
   );
