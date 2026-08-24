@@ -12,7 +12,7 @@ class_default_c,90,"Výchozí odhad celkové spotřeby pro třídu C, kWh/(m2.ro
 class_default_d,160,"Výchozí odhad celkové spotřeby pro třídu D, kWh/(m2.rok)"
 class_default_e,250,"Výchozí odhad celkové spotřeby pro třídu E, kWh/(m2.rok)"
 class_default_f,380,"Výchozí odhad celkové spotřeby pro třídu F, kWh/(m2.rok)"
-class_default_g,550,"Výchozí odhad celkové spotřeby pro třídu G, kWh/(m2.rok)"
+class_default_g,450,"Výchozí odhad celkové spotřeby pro třídu G, kWh/(m2.rok)"
 class_boundary_a,75,"Horní hranice třídy A, kWh/(m2.rok) (prázdné = bez horní hranice)"
 class_boundary_b,143,"Horní hranice třídy B, kWh/(m2.rok) (prázdné = bez horní hranice)"
 class_boundary_c,200,"Horní hranice třídy C, kWh/(m2.rok) (prázdné = bez horní hranice)"
