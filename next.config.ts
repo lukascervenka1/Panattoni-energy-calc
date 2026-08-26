@@ -1,35 +1,23 @@
 import type { NextConfig } from "next";
 
 /**
- * The page is public, static, and takes no user data — so the realistic
- * threats are framing (someone embedding the calculator inside a page that
- * passes it off as their own, or overlaying it to harvest clicks) and content
- * injected via the Google Sheet. These headers close the first and limit the
- * blast radius of the second.
+ * The page is public and takes no user data — so the realistic threats are
+ * framing (someone embedding the calculator inside a page that passes it off
+ * as their own, or overlaying it to harvest clicks) and content injected via
+ * the Google Sheet. These headers close the first and limit the blast radius
+ * of the second.
  *
- * Note on `script-src 'unsafe-inline'`: the page is statically prerendered, and
- * a nonce-based CSP would force every request to render dynamically. Since no
- * user-supplied string is ever written into the markup as HTML (React escapes
- * everything, and there is no dangerouslySetInnerHTML anywhere), the remaining
- * value of the CSP is in blocking *external* script/object/frame loads and
- * base/form hijacking, which the directives below still do.
+ * Content-Security-Policy is set here too, but only as a static fallback for
+ * routes the proxy doesn't cover (its matcher excludes prefetches and static
+ * assets). The real, strict CSP — with a per-request nonce and no
+ * `'unsafe-inline'` in script-src — is set in src/proxy.ts; see the comment
+ * there for why that needs a proxy instead of living here.
  */
-const CSP = [
-  "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
-  "font-src 'self'",
-  "connect-src 'self'",
-  "object-src 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-  "frame-ancestors 'none'",
-  "upgrade-insecure-requests",
-].join("; ");
-
 export const securityHeaders = [
-  { key: "Content-Security-Policy", value: CSP },
+  {
+    key: "Content-Security-Policy",
+    value: "default-src 'self'; script-src 'self'; object-src 'none'; frame-ancestors 'none'",
+  },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
