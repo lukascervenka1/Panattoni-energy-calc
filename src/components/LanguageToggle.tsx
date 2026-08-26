@@ -25,13 +25,20 @@ export function LanguageToggle() {
             type="button"
             onClick={() => setLocale(opt.value)}
             aria-pressed={active}
-            className="min-h-8 min-w-11 rounded-full px-3 py-1 text-xs font-semibold transition-colors duration-150"
-            style={{
-              background: active ? "#ffffff" : "transparent",
-              color: active ? "var(--color-navy)" : "rgba(255,255,255,0.6)",
-            }}
+            // The pill stays visually compact to sit right next to the 20px
+            // logo, but the button itself is a full 44px touch target; the
+            // negative margin keeps that extra height out of the layout.
+            className="-my-1.5 flex h-11 min-w-11 items-center justify-center"
           >
-            {opt.label}
+            <span
+              className="flex h-8 w-full items-center justify-center rounded-full px-3 text-xs font-semibold transition-colors duration-150"
+              style={{
+                background: active ? "#ffffff" : "transparent",
+                color: active ? "var(--color-navy)" : "rgba(255,255,255,0.6)",
+              }}
+            >
+              {opt.label}
+            </span>
           </button>
         );
       })}

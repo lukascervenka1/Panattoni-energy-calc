@@ -86,6 +86,12 @@ SHEETS_CONFIG_CSV_URL=https://docs.google.com/.../pub?gid=...&single=true&output
 Na Vercelu totéž nastavte v Project Settings → Environment Variables a znovu
 nasaďte (redeploy).
 
+Po nasazení na finální doménu nastavte ještě `SITE_URL` (např.
+`https://kalkulacka.panattonieurope.com`). Používá se jen pro absolutní adresu
+náhledového obrázku odkazu (Open Graph) — když ji nenastavíte, Vercel dosadí
+URL konkrétního nasazení, takže náhled bude fungovat, ale bude ukazovat na
+adresu daného deploye místo na produkční doménu.
+
 Aplikace CSV znovu stahuje nejpozději každých 5 minut (`revalidate: 300` v
 [src/lib/data.ts](src/lib/data.ts)) — změna v Google Sheetu se tedy na webu projeví
 bez nutnosti nového nasazení. Pokud stažení selže nebo proměnné nejsou nastavené,
