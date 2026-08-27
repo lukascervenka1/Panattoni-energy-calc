@@ -154,7 +154,7 @@ export const translations: Record<Locale, Translations> = {
     },
     footer: {
       credibility:
-        "Společnost Panattoni vede v žebříčku nejaktivnějších průmyslových developerů již osmý rok. Za poslední tři roky jsme dodali přes 14 milionů m² plochy dokončených průmyslových prostor za využití kapitálu ve výši cca 8,2 miliardy €.",
+        "Panattoni je největším developerem průmyslových nemovitostí a lídrem v oblasti udržitelné výstavby. Díky své globální působnosti nabízí klientům řešení přesně podle jejich potřeb – od výstavby na míru až po spekulativní projekty.",
       address: "V Celnici 1034/6, 110 00 Praha 1",
       website: "panattonieurope.com",
       websiteUrl: "https://panattonieurope.com/cz-cz",
@@ -237,8 +237,10 @@ export const translations: Record<Locale, Translations> = {
         "This data serves as an indicative estimate for initial calculation purposes only. For an exact offer, always contact your Panattoni account manager.",
     },
     footer: {
+      // Translated locally from marketing's CZ wording (not yet reviewed by
+      // marketing in English) — flag if they want it checked before it ships.
       credibility:
-        "Panattoni has ranked among the most active industrial developers for the eighth year running. Over the past three years we've delivered more than 14 million m² of completed industrial space, deploying approximately €8.2 billion in capital.",
+        "Panattoni is the largest developer of industrial real estate and a leader in sustainable construction. With our global reach, we offer clients solutions tailored exactly to their needs – from build-to-suit to speculative projects.",
       address: "V Celnici 1034/6, 110 00 Prague 1",
       website: "panattonieurope.com",
       websiteUrl: "https://panattonieurope.com/en",
