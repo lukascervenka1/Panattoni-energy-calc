@@ -45,3 +45,6 @@ next-env.d.ts
 /reference/*.xlsx
 /reference/*.pdf
 /reference/*.html
+
+# brand assets (logos, brand manual) — proprietary, not meant to ship in the repo
+/reference/brand/
