@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --color-navy: #020c1e;
+  /* Panattoni brand manual v2.0, p.10 — "navy blue", CMYK 100/76/12/68. */
+  --color-navy: #001844;
   --color-navy-soft: #0c1730;
   --color-paper: #fdfdff;
   --color-paper-dim: #f1f2f6;
@@ -78,7 +79,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #061133;
+  background: var(--color-navy);
   border: 3px solid var(--color-surface);
   box-shadow: 0 1px 3px rgba(2, 12, 30, 0.3);
   cursor: pointer;
@@ -93,7 +94,7 @@ input[type="range"]::-moz-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #061133;
+  background: var(--color-navy);
   border: 3px solid var(--color-surface);
   cursor: pointer;
 }
