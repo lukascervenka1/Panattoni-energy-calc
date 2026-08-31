@@ -94,7 +94,7 @@ describe("config.json", () => {
   });
 
   test("the reference target sits below even the best class", () => {
-    assert.equal(config.referencePneKwhM2, 30);
+    assert.equal(config.referencePneKwhM2, 35);
     assert.ok(config.referencePneKwhM2 < config.classDefaultsKwhM2.A);
   });
 

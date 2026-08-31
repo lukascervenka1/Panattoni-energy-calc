@@ -59,9 +59,6 @@ export interface Translations {
     referenceText: string;
     classEstimateLabel: string;
     classEstimateText: string;
-    yearBuiltLabel: string;
-    yearBuiltNot: string;
-    yearBuiltText: string;
     pricesLabel: string;
     pricesMidText: string;
     pricesTailText: string;
@@ -136,19 +133,14 @@ export const translations: Record<Locale, Translations> = {
       toggle: "Zdroje a metodika výpočtu",
       referenceLabel: "Referenční hodnota",
       referenceText:
-        "odpovídá nejúspornější čtvrtině (P25) měřené spotřeby ve skladových a logistických halách portfolia Panattoni (interní data, N=35 hal, 2023–2024) — reálný, dosažitelný cíl, ne teoretické minimum.",
+        "odpovídá nejúspornější čtvrtině měřené spotřeby ve skladových a logistických halách portfolia Panattoni — reálný, dosažitelný cíl, ne teoretické minimum.",
       classEstimateLabel: "Výchozí odhad spotřeby dle PENB třídy",
       classEstimateText:
-        'vychází tam, kde je k dispozici, z mediánu naměřených dat portfolia (třídy B a C, malé vzorky N=4 a N=10). Třídy bez dostatku portfoliových dat (A, D–G) jsou dopočítány odhadem konzistentním s hranicí pro TOP 15 % nejúspornějších budov kategorie „Budova pro výrobu a skladování" (třída C ≤ 143 kWh/(m²·rok)) dle studie TOP 15 % energeticky nejúspornějších budov v ČR (Česká spořitelna / CEVRE Consultants / EnergySim, 2024, finální hybridní metoda, databáze ENEX MPO). Vždy je ale lepší nahradit odhad skutečnou naměřenou spotřebou z vyúčtování.',
-      yearBuiltLabel: "Rok výstavby",
-      yearBuiltNot: "není",
-      yearBuiltText:
-        "záměrně vstupem do výpočtu. Stejná studie (str. 30) na reálných datech ověřila, že rok výstavby nekoreluje spolehlivě s energetickou náročností budovy, a EU Taxonomie výslovně nedoporučuje používat jej jako náhradní ukazatel. Naše vlastní portfolio to potvrzuje — bez přímé souvislosti mezi stářím haly a naměřenou spotřebou.",
+        'vychází z mediánu naměřených dat portfolia. Třídy bez dostatku portfoliových dat (A, D–G) jsou dopočítány odhadem konzistentním s hranicí pro TOP 15 % nejúspornějších budov kategorie „Budova pro výrobu a skladování" (třída C ≤ 143 kWh/(m²·rok)) dle studie TOP 15 % energeticky nejúspornějších budov v ČR (Česká spořitelna / CEVRE Consultants / EnergySim, 2024, finální hybridní metoda, databáze ENEX MPO). Vždy je ale lepší nahradit odhad skutečnou naměřenou spotřebou z vyúčtování.',
       pricesLabel: "Ceny energií a emisní faktory:",
       pricesMidText:
-        "(reálné průměrné sazby portfolia Panattoni, 2024). Emisní faktory: ELE dle skladby ČR mixu (ERÚ/ČHMÚ, ø 0,36 t/MWh), plyn dle spalování zemního plynu (MPO/IPCC, ø 0,202 t/MWh). Podíl ELE/plyn ve výchozím odhadu spotřeby (",
-      pricesTailText:
-        ") odpovídá skutečnému mixu naměřenému v portfoliu skladových hal za rok 2024.",
+        "Emisní faktory: ELE dle skladby ČR mixu (ERÚ/ČHMÚ, ø 0,36 t/MWh), plyn dle spalování zemního plynu (MPO/IPCC, ø 0,202 t/MWh). Podíl ELE/plyn ve výchozím odhadu spotřeby (",
+      pricesTailText: ") odpovídá skutečnému mixu naměřenému v portfoliu skladových hal.",
       disclaimer:
         "Tato data slouží jako orientační odhad pro účely prvotní kalkulace. Pro přesnou nabídku vždy kontaktujte svého Panattoni account manažera.",
     },
@@ -220,19 +212,14 @@ export const translations: Record<Locale, Translations> = {
       toggle: "Sources & calculation methodology",
       referenceLabel: "Reference value",
       referenceText:
-        "corresponds to the most efficient quartile (P25) of measured consumption across warehouse and logistics buildings in the Panattoni portfolio (internal data, N=35 buildings, 2023–2024) — a real, achievable target, not a theoretical minimum.",
+        "corresponds to the most efficient quartile of measured consumption across warehouse and logistics buildings in the Panattoni portfolio — a real, achievable target, not a theoretical minimum.",
       classEstimateLabel: "The default consumption estimate by PENB class",
       classEstimateText:
-        'is based, where available, on the median of measured portfolio data (classes B and C, small samples of N=4 and N=10). Classes without sufficient portfolio data (A, D–G) are estimated consistently with the TOP 15 % threshold for the most efficient buildings in the "Production and storage building" category (class C ≤ 143 kWh/(m²·yr)) per the study TOP 15 % Most Energy-Efficient Buildings in the Czech Republic (Česká spořitelna / CEVRE Consultants / EnergySim, 2024, final hybrid method, ENEX MPO database). It is always better to replace the estimate with actual measured consumption from your bills.',
-      yearBuiltLabel: "Year of construction",
-      yearBuiltNot: "is deliberately not",
-      yearBuiltText:
-        "used as an input to the calculation. The same study (p. 30) found, using real data, that construction year does not reliably correlate with a building's energy performance, and the EU Taxonomy explicitly advises against using it as a proxy. Our own portfolio confirms this — there is no direct link between a building's age and its measured consumption.",
+        'is based on the median of measured portfolio data. Classes without sufficient portfolio data (A, D–G) are estimated consistently with the TOP 15 % threshold for the most efficient buildings in the "Production and storage building" category (class C ≤ 143 kWh/(m²·yr)) per the study TOP 15 % Most Energy-Efficient Buildings in the Czech Republic (Česká spořitelna / CEVRE Consultants / EnergySim, 2024, final hybrid method, ENEX MPO database). It is always better to replace the estimate with actual measured consumption from your bills.',
       pricesLabel: "Energy prices and emission factors:",
       pricesMidText:
-        "(real average Panattoni portfolio rates, 2024). Emission factors: electricity based on the Czech grid mix (ERÚ/ČHMÚ, avg. 0.36 t/MWh), gas based on natural gas combustion (MPO/IPCC, avg. 0.202 t/MWh). The electricity/gas split in the default consumption estimate (",
-      pricesTailText:
-        ") matches the actual mix measured across the warehouse portfolio in 2024.",
+        "Emission factors: electricity based on the Czech grid mix (ERÚ/ČHMÚ, avg. 0.36 t/MWh), gas based on natural gas combustion (MPO/IPCC, avg. 0.202 t/MWh). The electricity/gas split in the default consumption estimate (",
+      pricesTailText: ") matches the actual mix measured across the warehouse portfolio.",
       disclaimer:
         "This data serves as an indicative estimate for initial calculation purposes only. For an exact offer, always contact your Panattoni account manager.",
     },

@@ -5,7 +5,7 @@ ele_co2_t_per_kwh,0.00036,"Emisní faktor elektřiny, t CO2 / kWh"
 gas_co2_t_per_kwh,0.000202,"Emisní faktor zemního plynu, t CO2 / kWh"
 ele_share_default,0.3,Podíl elektřiny na výchozím odhadu spotřeby (0-1)
 gas_share_default,0.7,Podíl plynu na výchozím odhadu spotřeby (0-1)
-reference_pne_kwh_m2,30,"Referenční spotřeba, kWh/(m2.rok)"
+reference_pne_kwh_m2,35,"Referenční spotřeba, kWh/(m2.rok)"
 class_default_a,40,"Výchozí odhad celkové spotřeby pro třídu A, kWh/(m2.rok)"
 class_default_b,55,"Výchozí odhad celkové spotřeby pro třídu B, kWh/(m2.rok)"
 class_default_c,90,"Výchozí odhad celkové spotřeby pro třídu C, kWh/(m2.rok)"

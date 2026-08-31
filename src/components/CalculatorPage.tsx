@@ -73,7 +73,7 @@ export function CalculatorPage({
                   label={t.sliders.ele}
                   value={eleKwhM2}
                   min={0}
-                  max={600}
+                  max={500}
                   step={5}
                   unit={t.sliders.mwhUnit}
                   onChange={setEleKwhM2}
@@ -87,7 +87,7 @@ export function CalculatorPage({
                   label={t.sliders.gas}
                   value={gasKwhM2}
                   min={0}
-                  max={400}
+                  max={350}
                   step={5}
                   unit={t.sliders.mwhUnit}
                   onChange={setGasKwhM2}

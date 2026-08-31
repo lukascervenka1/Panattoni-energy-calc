@@ -40,14 +40,9 @@ export function Methodology({ config }: { config: CalculatorConfig }) {
             {t.methodology.classEstimateText}
           </p>
           <p>
-            <strong className="text-[var(--color-text)]">{t.methodology.yearBuiltLabel}</strong>{" "}
-            <strong className="text-[var(--color-text)]">{t.methodology.yearBuiltNot}</strong>{" "}
-            {t.methodology.yearBuiltText}
-          </p>
-          <p>
             <strong className="text-[var(--color-text)]">{t.methodology.pricesLabel}</strong>{" "}
             {locale === "en" ? "electricity" : "elektřina"} {formatPrice(config.elePriceEurKwh, locale)}{" "}
-            €/kWh, {locale === "en" ? "gas" : "plyn"} {formatPrice(config.gasPriceEurKwh, locale)} €/kWh{" "}
+            €/kWh, {locale === "en" ? "gas" : "plyn"} {formatPrice(config.gasPriceEurKwh, locale)} €/kWh.{" "}
             {t.methodology.pricesMidText}
             {Math.round(config.eleShareDefault * 100)} % / {Math.round(config.gasShareDefault * 100)} %
             {t.methodology.pricesTailText}

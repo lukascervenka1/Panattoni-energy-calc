@@ -1,26 +1,16 @@
 [
   {
     "id": "N01",
-    "park": "Týniště nad Orlicí",
-    "category": "Sklad & logistika",
-    "areaM2": 16644,
-    "yearBuilt": 2022,
-    "pneKwhM2": 12.8,
-    "elecSharePct": 91,
+    "park": "Pilsen West II Building B",
+    "category": "Výroba",
+    "areaM2": 25135,
+    "yearBuilt": 2023,
+    "pneKwhM2": 33,
+    "elecSharePct": 95,
     "pneYear": 2025
   },
   {
     "id": "N02",
-    "park": "Prague Airport II",
-    "category": "Sklad & logistika",
-    "areaM2": 21171,
-    "yearBuilt": 2019,
-    "pneKwhM2": 24.1,
-    "elecSharePct": 99,
-    "pneYear": 2025
-  },
-  {
-    "id": "N03",
     "park": "Cheb East",
     "category": "Sklad & logistika",
     "areaM2": 60905,

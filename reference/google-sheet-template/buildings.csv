@@ -1,4 +1,3 @@
 id,park,category,area_m2,year_built,pne_kwh_m2,elec_share_pct,pne_year
-N01,Týniště nad Orlicí,Sklad & logistika,16644,2022,12.8,91,2025
-N02,Prague Airport II,Sklad & logistika,21171,2019,24.1,99,2025
-N03,Cheb East,Sklad & logistika,60905,2024,34.5,99,2025
+N01,Pilsen West II Building B,Výroba,25135,2023,33,95,2025
+N02,Cheb East,Sklad & logistika,60905,2024,34.5,99,2025

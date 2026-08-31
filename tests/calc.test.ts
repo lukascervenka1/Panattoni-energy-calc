@@ -75,69 +75,69 @@ describe("suggestConsumptionSplit", () => {
 
 describe("calculateSavings — worked examples", () => {
   test("app default state: class C, 15 000 m²", () => {
-    // delta      = (90 - 30) * 15000            = 900 000 kWh
+    // delta      = (90 - 35) * 15000            = 825 000 kWh
     // priceBlend = (25*0.09 + 65*0.042) / 90    = 4.98/90  = 0.055333… €/kWh
     // co2Blend   = (25*0.00036 + 65*0.000202)/90 = 0.02213/90
     const r = calculateSavings({ areaM2: 15000, eleKwhM2: 25, gasKwhM2: 65 }, config);
 
     assert.equal(r.isOptimal, false);
     assert.equal(r.currentPneKwhM2, 90);
-    assert.equal(r.referencePneKwhM2, 30);
-    assert.equal(r.reductionPct, 67); // 1 - 30/90 = 66.67 %
-    assert.equal(r.annualSavingsEur, 49_800); // 900 000 * 4.98/90
-    assert.equal(r.fiveYearSavingsEur, 249_000);
-    assert.equal(r.tenYearSavingsEur, 498_000);
-    assert.equal(r.annualSavingsMwh, 900);
-    assert.equal(r.annualCo2SavingsT, 221); // 10 000 * 0.02213 = 221.3
-    assert.ok(Math.abs(r.annualSavingsEurPerM2 - 3.32) < 1e-9);
+    assert.equal(r.referencePneKwhM2, 35);
+    assert.equal(r.reductionPct, 61); // 1 - 35/90 = 61.11 %
+    assert.equal(r.annualSavingsEur, 45_650); // 825 000 * 4.98/90
+    assert.equal(r.fiveYearSavingsEur, 228_250);
+    assert.equal(r.tenYearSavingsEur, 456_500);
+    assert.equal(r.annualSavingsMwh, 825);
+    assert.equal(r.annualCo2SavingsT, 203); // 825 000 * 0.02213/90 = 202.86
+    assert.ok(Math.abs(r.annualSavingsEurPerM2 - 3.0433333) < 1e-6);
   });
 
   test("class D, 15 000 m² (matches the figures shown in the UI)", () => {
-    // ELE 50 + gas 110 = 160; delta = 130 * 15000 = 1 950 000 kWh
+    // ELE 50 + gas 110 = 160; delta = 125 * 15000 = 1 875 000 kWh
     // priceBlend = (50*0.09 + 110*0.042)/160 = 9.12/160 = 0.057 €/kWh
     const r = calculateSavings({ areaM2: 15000, eleKwhM2: 50, gasKwhM2: 110 }, config);
 
-    assert.equal(r.reductionPct, 81); // 1 - 30/160 = 81.25 %
-    assert.equal(r.annualSavingsEur, 111_150); // -> "111,2 tis. €"
-    assert.equal(r.fiveYearSavingsEur, 555_750); // -> "555,8 tis. €"
-    assert.equal(r.annualSavingsMwh, 1_950);
-    assert.equal(r.annualCo2SavingsT, 490);
-    assert.ok(Math.abs(r.annualSavingsEurPerM2 - 7.41) < 1e-9);
+    assert.equal(r.reductionPct, 78); // 1 - 35/160 = 78.125 %
+    assert.equal(r.annualSavingsEur, 106_875); // -> "106,9 tis. €"
+    assert.equal(r.fiveYearSavingsEur, 534_375);
+    assert.equal(r.annualSavingsMwh, 1_875);
+    assert.equal(r.annualCo2SavingsT, 471);
+    assert.ok(Math.abs(r.annualSavingsEurPerM2 - 7.125) < 1e-9);
   });
 
   test("class G, 15 000 m²", () => {
-    // ELE 135 + gas 315 = 450; delta = 420 * 15000 = 6 300 000 kWh
+    // ELE 135 + gas 315 = 450; delta = 415 * 15000 = 6 225 000 kWh
     // priceBlend = (135*0.09 + 315*0.042)/450 = 25.38/450 = 0.0564 €/kWh
     const r = calculateSavings({ areaM2: 15000, eleKwhM2: 135, gasKwhM2: 315 }, config);
 
-    assert.equal(r.reductionPct, 93);
-    assert.equal(r.annualSavingsEur, 355_320);
-    assert.equal(r.fiveYearSavingsEur, 1_776_600);
-    assert.equal(r.annualSavingsMwh, 6_300);
-    assert.equal(r.annualCo2SavingsT, 1_571);
-    assert.ok(Math.abs(r.annualSavingsEurPerM2 - 23.688) < 1e-9);
+    assert.equal(r.reductionPct, 92);
+    assert.equal(r.annualSavingsEur, 351_090);
+    assert.equal(r.fiveYearSavingsEur, 1_755_450);
+    assert.equal(r.annualSavingsMwh, 6_225);
+    assert.equal(r.annualCo2SavingsT, 1_553);
+    assert.ok(Math.abs(r.annualSavingsEurPerM2 - 23.406) < 1e-9);
   });
 });
 
 describe("price and CO2 blending follow the actual ELE:gas ratio", () => {
-  // All three cases share delta = (100 - 30) * 10 000 = 700 000 kWh.
+  // All three cases share delta = (100 - 35) * 10 000 = 650 000 kWh.
   const AREA = 10000;
 
   test("all-electricity building is charged the electricity rate exactly", () => {
     const r = calculateSavings({ areaM2: AREA, eleKwhM2: 100, gasKwhM2: 0 }, config);
-    assert.equal(r.annualSavingsEur, 63_000); // 700 000 * 0.09
-    assert.equal(r.annualCo2SavingsT, 252); // 700 000 * 0.00036
+    assert.equal(r.annualSavingsEur, 58_500); // 650 000 * 0.09
+    assert.equal(r.annualCo2SavingsT, 234); // 650 000 * 0.00036
   });
 
   test("all-gas building is charged the gas rate exactly", () => {
     const r = calculateSavings({ areaM2: AREA, eleKwhM2: 0, gasKwhM2: 100 }, config);
-    assert.equal(r.annualSavingsEur, 29_400); // 700 000 * 0.042
-    assert.equal(r.annualCo2SavingsT, 141); // 700 000 * 0.000202 = 141.4
+    assert.equal(r.annualSavingsEur, 27_300); // 650 000 * 0.042
+    assert.equal(r.annualCo2SavingsT, 131); // 650 000 * 0.000202 = 131.3
   });
 
   test("50/50 building lands exactly midway between the two", () => {
     const r = calculateSavings({ areaM2: AREA, eleKwhM2: 50, gasKwhM2: 50 }, config);
-    assert.equal(r.annualSavingsEur, 46_200); // (63 000 + 29 400) / 2
+    assert.equal(r.annualSavingsEur, 42_900); // (58 500 + 27 300) / 2
   });
 
   test("shifting the mix toward gas lowers the € saved on identical kWh", () => {
@@ -149,10 +149,10 @@ describe("price and CO2 blending follow the actual ELE:gas ratio", () => {
 });
 
 describe("reference-value boundary", () => {
-  test("exactly at the reference (30) reads as optimal, with no savings", () => {
-    const r = calculateSavings({ areaM2: 10000, eleKwhM2: 15, gasKwhM2: 15 }, config);
+  test("exactly at the reference (35) reads as optimal, with no savings", () => {
+    const r = calculateSavings({ areaM2: 10000, eleKwhM2: 15, gasKwhM2: 20 }, config);
     assert.equal(r.isOptimal, true);
-    assert.equal(r.currentPneKwhM2, 30);
+    assert.equal(r.currentPneKwhM2, 35);
     assert.equal(r.annualSavingsEur, 0);
     assert.equal(r.annualSavingsEurPerM2, 0);
     assert.equal(r.annualCo2SavingsT, 0);
@@ -167,10 +167,10 @@ describe("reference-value boundary", () => {
   });
 
   test("one kWh/m² above the reference produces a small real saving", () => {
-    const r = calculateSavings({ areaM2: 10000, eleKwhM2: 15, gasKwhM2: 16 }, config);
+    const r = calculateSavings({ areaM2: 10000, eleKwhM2: 15, gasKwhM2: 21 }, config);
     assert.equal(r.isOptimal, false);
-    assert.equal(r.currentPneKwhM2, 31);
-    assert.equal(r.annualSavingsEur, 652); // 10 000 * 2.022/31
+    assert.equal(r.currentPneKwhM2, 36);
+    assert.equal(r.annualSavingsEur, 620); // 10 000 * 2.232/36
     assert.equal(r.reductionPct, 3);
     assert.equal(r.annualSavingsMwh, 10);
   });
@@ -195,7 +195,7 @@ describe("invariants", () => {
     const small = calculateSavings({ areaM2: 500, eleKwhM2: 100, gasKwhM2: 0 }, config);
     const large = calculateSavings({ areaM2: 200000, eleKwhM2: 100, gasKwhM2: 0 }, config);
     assert.ok(Math.abs(small.annualSavingsEurPerM2 - large.annualSavingsEurPerM2) < 1e-9);
-    assert.ok(Math.abs(small.annualSavingsEurPerM2 - 6.3) < 1e-9); // 70 kWh * 0.09
+    assert.ok(Math.abs(small.annualSavingsEurPerM2 - 5.85) < 1e-9); // 65 kWh * 0.09
   });
 
   test("doubling the area doubles the annual saving", () => {
@@ -218,7 +218,7 @@ describe("invariants", () => {
   });
 
   test("reduction stays a strict percentage below 100", () => {
-    for (const kwhM2 of [31, 90, 450, 5000]) {
+    for (const kwhM2 of [36, 90, 450, 5000]) {
       const r = calculateSavings(
         { areaM2: 15000, eleKwhM2: kwhM2 * 0.3, gasKwhM2: kwhM2 * 0.7 },
         config,

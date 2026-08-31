@@ -5,7 +5,7 @@
   "gasCo2TPerKwh": 0.000202,
   "eleShareDefault": 0.30,
   "gasShareDefault": 0.70,
-  "referencePneKwhM2": 30,
+  "referencePneKwhM2": 35,
   "classDefaultsKwhM2": {
     "A": 40,
     "B": 55,

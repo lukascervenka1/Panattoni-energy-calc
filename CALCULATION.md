@@ -12,8 +12,8 @@ Uživatel zadává tři hodnoty (viz [`SliderField`](src/components/SliderField.
 | Vstup | Proměnná v kódu | Výchozí rozsah |
 |---|---|---|
 | Pronajatá plocha | `areaM2` | 500–200 000 m² |
-| Spotřeba elektřiny | `eleKwhM2` | 0–600 kWh/(m²·rok) |
-| Spotřeba plynu | `gasKwhM2` | 0–400 kWh/(m²·rok) |
+| Spotřeba elektřiny | `eleKwhM2` | 0–500 kWh/(m²·rok) |
+| Spotřeba plynu | `gasKwhM2` | 0–350 kWh/(m²·rok) |
 
 `eleKwhM2` a `gasKwhM2` se přednastaví podle zvolené třídy PENB (krok 2 níže), ale
 uživatel je může kdykoli přepsat skutečnou naměřenou spotřebou.
@@ -56,12 +56,12 @@ Pokud je `currentPneKwhM2 ≤ referencePneKwhM2` (viz krok 4), kalkulačka vrát
 ## 4. Referenční hodnota
 
 ```
-referencePneKwhM2 = config.referencePneKwhM2   // 30 kWh/(m²·rok)
+referencePneKwhM2 = config.referencePneKwhM2   // 35 kWh/(m²·rok)
 ```
 
-Odpovídá nejúspornější čtvrtině (P25) reálně naměřené spotřeby ve skladových a
-logistických halách portfolia Panattoni (N=35, 2023–2024) — je to tedy reálný,
-dosažitelný cíl, ne teoretické minimum. Podrobnosti a zdroje viz
+Odpovídá nejúspornější čtvrtině reálně naměřené spotřeby ve skladových a
+logistických halách portfolia Panattoni — je to tedy reálný, dosažitelný cíl,
+ne teoretické minimum. Podrobnosti a zdroje viz
 [`Methodology.tsx`](src/components/Methodology.tsx) v aplikaci.
 
 ## 5. Rozdíl ve spotřebě
@@ -115,7 +115,7 @@ projekci).
 Pro rychlou orientaci, celý výpočet roční úspory v jednom výrazu:
 
 ```
-úspora [€/rok] = (spotřeba_ELE + spotřeba_plyn − 30) × plocha × smíšená_cena
+úspora [€/rok] = (spotřeba_ELE + spotřeba_plyn − 35) × plocha × smíšená_cena
 ```
 
 kde `smíšená_cena` je vážený průměr cen ELE a plynu podle jejich podílu na aktuální
