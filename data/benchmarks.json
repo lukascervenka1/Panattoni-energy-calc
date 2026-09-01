@@ -18,5 +18,15 @@
     "pneKwhM2": 34.5,
     "elecSharePct": 99,
     "pneYear": 2025
+  },
+  {
+    "id": "N03",
+    "park": "Kojetín",
+    "category": "Sklad & logistika",
+    "areaM2": 186903,
+    "yearBuilt": 2022,
+    "pneKwhM2": 37,
+    "elecSharePct": 100,
+    "pneYear": 2025
   }
 ]
