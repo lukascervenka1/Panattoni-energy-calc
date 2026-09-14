@@ -33,6 +33,13 @@ export interface CalculatorConfig {
   eleShareDefault: number;
   gasShareDefault: number;
   referencePneKwhM2: number;
+  /**
+   * Share of the reference (offered) building's own consumption covered by
+   * electricity — fixed by business decision, not derived from the
+   * visitor's input. A visitor typing an all-gas or all-electric invoice
+   * must not change what the *reference* building is assumed to run on.
+   */
+  referenceEleSharePct: number;
   classDefaultsKwhM2: Record<PenbClass, number>;
   classBoundariesKwhM2: Record<PenbClass, number | null>;
 }

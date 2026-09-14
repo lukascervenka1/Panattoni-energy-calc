@@ -67,6 +67,45 @@ export function ResultsHero({ result }: { result: CalculatorResult }) {
     );
   }
 
+  // Consumption is genuinely lower (reductionPct/MWh are real), but at
+  // today's prices the switch wouldn't lower cost — electricity costs more
+  // per kWh than gas, so a building that's already efficient but gas-heavy
+  // can lose on money while still using less energy. Showing three "0 €"
+  // tiles next to a real "−13 %" headline reads as broken, not honest — so
+  // this state drops the tiles for one sentence instead.
+  if (!result.hasFinancialSavings) {
+    return (
+      <div className="relative overflow-hidden rounded-2xl bg-[var(--color-navy)]">
+        <Glow />
+        <div className="relative">
+          <div className="flex flex-col gap-2 p-6 sm:p-8 sm:pb-7">
+            <p className="text-xs font-medium uppercase tracking-wide text-white/60">
+              {t.results.costNeutralEyebrow}
+            </p>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span className="font-heading text-5xl font-semibold leading-none tracking-[-0.03em] text-white sm:text-6xl">
+                −<AnimatedPct value={result.reductionPct} />%
+              </span>
+              <span className="text-sm text-white/70 sm:text-base">
+                {t.results.reductionSuffix}
+              </span>
+            </div>
+          </div>
+
+          <p className="border-t border-white/10 px-6 py-4 text-sm text-white/70 sm:px-8">
+            {t.results.costNeutralNote}
+          </p>
+
+          <p className="border-t border-white/10 px-6 py-4 text-sm text-white/60 sm:px-8">
+            {t.results.consumptionPrefix} {num(result.currentPneKwhM2)} →{" "}
+            {num(result.referencePneKwhM2)} kWh/(m²·{locale === "en" ? "yr" : "rok"}){" "}
+            {t.results.savingsInfix} {num(result.annualSavingsMwh)} {t.results.perYear}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative overflow-hidden rounded-2xl bg-[var(--color-navy)]">
       <Glow />

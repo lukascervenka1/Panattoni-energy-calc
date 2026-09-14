@@ -100,6 +100,7 @@ export function parseConfig(
       fallback.referencePneKwhM2,
       Number.MIN_VALUE,
     ),
+    referenceEleSharePct: share("reference_ele_share_pct", fallback.referenceEleSharePct),
     classDefaultsKwhM2,
     classBoundariesKwhM2,
   };

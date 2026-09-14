@@ -6,6 +6,7 @@
   "eleShareDefault": 0.30,
   "gasShareDefault": 0.70,
   "referencePneKwhM2": 35,
+  "referenceEleSharePct": 1.0,
   "classDefaultsKwhM2": {
     "A": 40,
     "B": 55,

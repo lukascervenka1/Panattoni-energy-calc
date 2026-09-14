@@ -98,6 +98,12 @@ describe("config.json", () => {
     assert.ok(config.referencePneKwhM2 < config.classDefaultsKwhM2.A);
   });
 
+  test("the reference building's own mix is fixed, not derived from a visitor's input", () => {
+    // Business decision, not a portfolio stat: the offered building runs on
+    // electricity only (no on-site PV factored into its price).
+    assert.equal(config.referenceEleSharePct, 1);
+  });
+
   test("matches the Google Sheet template key for key", () => {
     const values = new Map(readTemplate("config.csv").map((r) => [r.key, r.value]));
     const expect = (key: string, value: number) =>
@@ -110,6 +116,7 @@ describe("config.json", () => {
     expect("ele_share_default", config.eleShareDefault);
     expect("gas_share_default", config.gasShareDefault);
     expect("reference_pne_kwh_m2", config.referencePneKwhM2);
+    expect("reference_ele_share_pct", config.referenceEleSharePct);
 
     for (const c of CLASSES) {
       expect(`class_default_${c.toLowerCase()}`, config.classDefaultsKwhM2[c]);

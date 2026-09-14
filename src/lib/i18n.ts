@@ -24,6 +24,8 @@ export interface Translations {
     optimalEyebrow: string;
     optimalConsumptionPrefix: string;
     optimalConsumptionSuffix: string;
+    costNeutralEyebrow: string;
+    costNeutralNote: string;
     eyebrow: string;
     reductionSuffix: string;
     perM2Label: string;
@@ -100,6 +102,9 @@ export const translations: Record<Locale, Translations> = {
       optimalConsumptionPrefix: "Spotřeba",
       optimalConsumptionSuffix:
         "kWh/(m²·rok) — srovnatelné s nejúspornější čtvrtinou portfolia Panattoni.",
+      costNeutralEyebrow: "Patříte mezi nejúspornější haly na trhu",
+      costNeutralNote:
+        "Vaše spotřeba na m² je už dnes výrazně pod běžným standardem. Ozvěte se nám — probereme, jak si tenhle náskok udržet i do budoucna.",
       eyebrow: "Kolik ušetříte na energiích",
       reductionSuffix: "méně energie než dnes",
       perM2Label: "Úspora na m² / rok",
@@ -179,6 +184,9 @@ export const translations: Record<Locale, Translations> = {
       optimalConsumptionPrefix: "Consumption",
       optimalConsumptionSuffix:
         "kWh/(m²·yr) — comparable to the most efficient quartile of the Panattoni portfolio.",
+      costNeutralEyebrow: "You're already among the most efficient",
+      costNeutralNote:
+        "Your consumption per m² is already well below the market standard. Get in touch — we'll talk through how to keep that edge going forward.",
       eyebrow: "How much you'll save on energy",
       reductionSuffix: "less energy than today",
       perM2Label: "Savings per m² / year",
