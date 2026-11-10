@@ -30,8 +30,11 @@ export async function storePenb(
   bytes: Uint8Array,
   record: Omit<StoredPenbRecord, "sha256" | "sizeBytes" | "uploadedAt">,
 ): Promise<boolean> {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    console.warn("[penb] BLOB_READ_WRITE_TOKEN is not set — certificate not stored");
+  // A store connected in the Vercel dashboard now provides BLOB_STORE_ID and
+  // authenticates with the deployment's OIDC token; older stores (and local
+  // `vercel env pull`) use a read-write token. @vercel/blob handles both.
+  if (!process.env.BLOB_STORE_ID && !process.env.BLOB_READ_WRITE_TOKEN) {
+    console.warn("[penb] no Blob store configured (BLOB_STORE_ID) — certificate not stored");
     return false;
   }
 

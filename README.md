@@ -122,9 +122,13 @@ uloží pro budování vlastních dat. Jak se hodnoty z průkazu dostanou do vý
 
 1. Vercel → projekt → **Storage → Create → Blob**, přístup zvolte **Private**.
 2. Store připojte k projektu (Production i Preview). Vercel sám přidá proměnnou
-   `BLOB_READ_WRITE_TOKEN` — pak je potřeba nový deploy.
-3. Bez té proměnné vše funguje dál, jen se průkazy **neukládají** (v logu je
-   varování `[penb] BLOB_READ_WRITE_TOKEN is not set`).
+   `BLOB_STORE_ID` a funkce se k úložišti přihlašují automaticky (OIDC) — pak je
+   potřeba nový deploy. Starší store místo toho přidá `BLOB_READ_WRITE_TOKEN`;
+   funguje obojí.
+3. Bez těchto proměnných vše funguje dál, jen se průkazy **neukládají** (v logu
+   je varování `[penb] no Blob store configured`).
+4. Region funkcí (Settings → Functions) nastavte na **Frankfurt (fra1)**, stejně
+   jako je Blob store — jinak průkazy s osobními údaji putují přes USA.
 
 Uložené průkazy najdete ve Vercelu pod **Storage → (váš Blob store) → Browser**,
 složka `penb/`. Ke každému průkazu jsou dva soubory se stejným názvem (SHA-256
@@ -146,7 +150,7 @@ Přijímá jen POST z vlastní domény (kontrola `Origin`), max. 4 MB, jen soubo
 s PDF hlavičkou (ne podle přípony), max. 150 stran a 200 000 textových prvků.
 Z PDF se nic nevykresluje ani nespouští. Samotné čtení běží v **samostatném
 vlákně** (worker thread), které se okamžitě ukončí po 15 s nebo když paměť
-naroste o víc než 768 MB — PDF se dá zabalit tak, že ~1 MB souboru se rozbalí
+samo zabere víc než 384 MB (Hobby plán dává funkci 1 GB) — PDF se dá zabalit tak, že ~1 MB souboru se rozbalí
 na gigabajty, a bez toho by shodil celou funkci včetně požadavků ostatních
 návštěvníků. Reálné průkazy se čtou do 1 s a do 200 MB. Limit 10 nahrání za 10 minut na
 IP je jen orientační (na serverless běží zvlášť v každé instanci) — **skutečný

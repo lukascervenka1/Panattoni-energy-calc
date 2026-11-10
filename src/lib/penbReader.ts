@@ -9,10 +9,20 @@ const READ_TIMEOUT_MS = 15_000;
 /**
  * pdf.js keeps every decoded stream in memory, so ~1 MB of compressed
  * whitespace inflates to gigabytes — enough to take down the function and
- * every request it's serving. Real certificates add under 200 MB.
+ * every request it's serving. Real certificates use under 200 MB; the Hobby
+ * plan gives a function 1 GB in total.
  */
-const MAX_MEMORY_GROWTH_BYTES = 768 * 1024 * 1024;
+const MAX_WORKER_MEMORY_BYTES = 384 * 1024 * 1024;
 const MEMORY_CHECK_MS = 25;
+
+/**
+ * Node ≥ 22.16 (Vercel runs 24) can report a worker's own heap, including the
+ * ArrayBuffers pdf.js decodes into, even mid-loop. @types/node 20 doesn't
+ * know the method yet.
+ */
+type MeasurableWorker = Worker & {
+  getHeapStatistics?: () => Promise<{ used_heap_size: number; external_memory?: number }>;
+};
 
 export type PenbReadFailure = PdfExtractionCode | "timeout" | "too_much_memory" | "crashed";
 
@@ -22,19 +32,18 @@ export type PenbReadOutcome =
 
 /**
  * Reads a certificate in a worker thread that is terminated outright on a
- * timeout or when memory runs away. pdf.js decodes a stream in one
+ * timeout or when its memory runs away. pdf.js decodes a stream in one
  * synchronous go, so on the request's own thread neither check could ever
  * fire — and a crafted file would stall or crash everything else the
  * instance is serving. Never rejects.
  */
 export function readPenb(bytes: Uint8Array): Promise<PenbReadOutcome> {
   return new Promise((resolve) => {
-    const worker = new Worker(new URL("./penbWorker.ts", import.meta.url), {
+    const worker: MeasurableWorker = new Worker(new URL("./penbWorker.ts", import.meta.url), {
       // Caps the JS heap; the decoded-stream buffers live outside it, which
-      // is what the RSS watchdog below is for.
-      resourceLimits: { maxOldGenerationSizeMb: 512 },
+      // is what the watchdog below is for.
+      resourceLimits: { maxOldGenerationSizeMb: 256 },
     });
-    const baseline = process.memoryUsage.rss();
 
     let settled = false;
     const finish = (outcome: PenbReadOutcome) => {
@@ -47,9 +56,24 @@ export function readPenb(bytes: Uint8Array): Promise<PenbReadOutcome> {
     };
 
     const timer = setTimeout(() => finish({ ok: false, failure: "timeout" }), READ_TIMEOUT_MS);
-    const watchdog = setInterval(() => {
-      if (process.memoryUsage.rss() - baseline > MAX_MEMORY_GROWTH_BYTES) {
-        finish({ ok: false, failure: "too_much_memory" });
+
+    // Measures this worker alone, so a hostile upload never cuts short a
+    // visitor's certificate being read alongside it. Where the runtime can't
+    // measure a worker, the whole process's growth stands in for it.
+    const baseline = process.memoryUsage.rss();
+    let measuring = false;
+    const watchdog = setInterval(async () => {
+      if (measuring) return;
+      measuring = true;
+      try {
+        const used = worker.getHeapStatistics
+          ? await worker.getHeapStatistics().then((s) => s.used_heap_size + (s.external_memory ?? 0))
+          : process.memoryUsage.rss() - baseline;
+        if (used > MAX_WORKER_MEMORY_BYTES) finish({ ok: false, failure: "too_much_memory" });
+      } catch {
+        // The worker finished or was terminated between ticks.
+      } finally {
+        measuring = false;
       }
     }, MEMORY_CHECK_MS);
 
