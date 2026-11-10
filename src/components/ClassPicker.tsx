@@ -28,7 +28,8 @@ export function ClassPicker({
   value,
   onChange,
 }: {
-  value: PenbClass;
+  /** null when the fields were filled from an uploaded certificate instead. */
+  value: PenbClass | null;
   onChange: (c: PenbClass) => void;
 }) {
   return (

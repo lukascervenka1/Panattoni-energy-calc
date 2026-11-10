@@ -1,3 +1,5 @@
+import type { PenbUploadError } from "./penbUpload";
+
 export type Locale = "cs" | "en";
 
 export const LOCALES: Locale[] = ["cs", "en"];
@@ -13,6 +15,24 @@ export interface Translations {
   step1Label: string;
   step2Label: string;
   classHelper: string;
+  penb: {
+    dropTitle: string;
+    dropTitleActive: string;
+    choose: string;
+    dropHint: string;
+    consent: string;
+    consentNeeded: string;
+    reading: string;
+    successTitle: string;
+    area: string;
+    ele: string;
+    gas: string;
+    replace: string;
+    orPickClass: string;
+    /** Shown only when the certificate's figures didn't add up to its own total. */
+    unverified: string;
+    errors: Record<PenbUploadError | "network", string>;
+  };
   sliders: {
     mwhUnit: string;
     area: string;
@@ -86,9 +106,44 @@ export const translations: Record<Locale, Translations> = {
       scope: "Kalkulačka platí pro skladové haly, ne pro výrobní provozy.",
     },
     step1Label: "Parametry budovy",
-    step2Label: "Neznáte spotřebu? Vyberte třídu PENB",
+    step2Label: "Neznáte spotřebu? Nahrajte průkaz PENB",
     classHelper:
       "Zvolením třídy PENB doplníme odhad spotřeby do polí výše. Pokud znáte skutečné hodnoty z vyúčtování, zadejte je raději přímo.",
+    penb: {
+      dropTitle: "Přetáhněte sem průkaz PENB",
+      dropTitleActive: "Pusťte soubor sem",
+      choose: "Vybrat soubor",
+      dropHint: "PDF do 4 MB. Plochu i spotřebu z něj doplníme za vás.",
+      consent:
+        "Souhlasím, aby si Panattoni nahraný průkaz uložila a využila jej pro tento výpočet a pro anonymní srovnání energetické náročnosti budov.",
+      consentNeeded: "Pro nahrání průkazu prosím potvrďte souhlas.",
+      reading: "Čteme průkaz…",
+      successTitle: "Hodnoty z průkazu jsme doplnili do polí výše",
+      area: "Plocha",
+      ele: "Elektřina",
+      gas: "Plyn",
+      replace: "Nahrát jiný průkaz",
+      orPickClass: "nebo vyberte jen třídu PENB",
+      unverified:
+        "Některá čísla se nepodařilo ověřit proti součtu v průkazu — zkontrolujte je prosím.",
+      errors: {
+        forbidden: "Nahrání se nezdařilo. Obnovte prosím stránku a zkuste to znovu.",
+        rate_limited: "Příliš mnoho pokusů za krátkou dobu. Zkuste to prosím za pár minut.",
+        consent_required: "Pro nahrání průkazu prosím potvrďte souhlas.",
+        missing_file: "Soubor se nepodařilo načíst. Zkuste to prosím znovu.",
+        too_large:
+          "Soubor je větší než 4 MB. Zkuste nahrát jen protokol průkazu, nebo zadejte hodnoty ručně.",
+        not_pdf: "Nahrajte prosím průkaz ve formátu PDF.",
+        unreadable: "Soubor se nepodařilo otevřít. Zkuste jiné PDF, nebo zadejte hodnoty ručně.",
+        no_text:
+          "Průkaz je zřejmě naskenovaný, takže z něj čísla neumíme přečíst. Zadejte je prosím ručně.",
+        not_penb: "Tohle nevypadá jako průkaz energetické náročnosti budovy.",
+        no_values:
+          "Průkaz jsme přijali, ale spotřebu se z něj nepodařilo přečíst. Zadejte ji prosím ručně.",
+        server: "Něco se pokazilo na naší straně. Zkuste to prosím znovu.",
+        network: "Nepodařilo se spojit se serverem. Zkontrolujte připojení a zkuste to znovu.",
+      },
+    },
     sliders: {
       mwhUnit: "MWh/rok",
       area: "Pronajatá plocha",
@@ -168,9 +223,44 @@ export const translations: Record<Locale, Translations> = {
       scope: "This calculator applies to warehouse halls, not manufacturing facilities.",
     },
     step1Label: "Building parameters",
-    step2Label: "Don't know your consumption? Pick your PENB class",
+    step2Label: "Don't know your consumption? Upload your PENB certificate",
     classHelper:
       "Picking a PENB class fills the fields above with an estimate. If you know the actual figures from your bills, enter those instead.",
+    penb: {
+      dropTitle: "Drop your PENB certificate here",
+      dropTitleActive: "Release to upload",
+      choose: "Choose file",
+      dropHint: "PDF up to 4 MB. We'll fill in the area and consumption for you.",
+      consent:
+        "I agree that Panattoni may store the uploaded certificate and use it for this calculation and for anonymous benchmarking of building energy performance.",
+      consentNeeded: "Please confirm your consent to upload the certificate.",
+      reading: "Reading certificate…",
+      successTitle: "We've filled in the fields above from your certificate",
+      area: "Area",
+      ele: "Electricity",
+      gas: "Gas",
+      replace: "Upload a different certificate",
+      orPickClass: "or just pick a PENB class",
+      unverified:
+        "Some figures couldn't be checked against the certificate's own total — please review them.",
+      errors: {
+        forbidden: "The upload failed. Please reload the page and try again.",
+        rate_limited: "Too many attempts in a short time. Please try again in a few minutes.",
+        consent_required: "Please confirm your consent to upload the certificate.",
+        missing_file: "The file couldn't be read. Please try again.",
+        too_large:
+          "The file is larger than 4 MB. Try uploading just the certificate protocol, or enter the values manually.",
+        not_pdf: "Please upload the certificate as a PDF.",
+        unreadable: "The file couldn't be opened. Try another PDF, or enter the values manually.",
+        no_text:
+          "The certificate appears to be a scan, so we can't read the figures from it. Please enter them manually.",
+        not_penb: "This doesn't look like a building energy performance certificate (PENB).",
+        no_values:
+          "We received the certificate but couldn't read the consumption from it. Please enter it manually.",
+        server: "Something went wrong on our side. Please try again.",
+        network: "Couldn't reach the server. Check your connection and try again.",
+      },
+    },
     sliders: {
       mwhUnit: "MWh/yr",
       area: "Leased area",

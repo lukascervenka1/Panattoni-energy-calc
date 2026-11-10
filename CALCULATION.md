@@ -11,7 +11,7 @@ Uživatel zadává tři hodnoty (viz [`SliderField`](src/components/SliderField.
 
 | Vstup | Proměnná v kódu | Výchozí rozsah |
 |---|---|---|
-| Pronajatá plocha | `areaM2` | 500–200 000 m² |
+| Pronajatá plocha | `areaM2` | 500–250 000 m² |
 | Spotřeba elektřiny | `eleKwhM2` | 0–500 kWh/(m²·rok) |
 | Spotřeba plynu | `gasKwhM2` | 0–350 kWh/(m²·rok) |
 
@@ -43,6 +43,52 @@ spotřeby zadávané budovy — nemá nic společného s referenční (nabízeno
 v kroku 4, ta má svůj vlastní, pevně daný mix.
 
 *Funkce: [`suggestConsumptionSplit()`](src/lib/calc.ts).*
+
+### Hodnoty z nahraného průkazu PENB
+
+Místo odhadu podle třídy může uživatel nahrát PDF průkazu. Kalkulačka z protokolu
+přečte:
+
+| Údaj v průkazu | Kam jde |
+|---|---|
+| Celková energeticky vztažná plocha budovy | `areaM2` |
+| Sekce B, řádek **elektřina**, sloupec Celkem (MWh/rok) | `eleKwhM2 = MWh × 1000 / plocha` |
+| Sekce B, řádek **zemní plyn** + ostatní nakupovaná paliva (SZTE, LTO, LPG, uhlí, biomasa) | `gasKwhM2 = MWh × 1000 / plocha` |
+| Sekce B, řádek **energie okolního prostředí** | **nikam** |
+
+U starších průkazů (vyhláška 78/2013) se tytéž údaje berou z přiloženého výpočtu
+programu Energie: MWh po energonositelích z tabulky „Součty pro jednotlivé
+energonositele" (sloupec Q,f) a plocha jako součet energeticky vztažných ploch zón.
+
+**Energie okolního prostředí se do výpočtu nedostane nikdy.** Je to teplo, které
+tepelné čerpadlo odebírá ze vzduchu nebo země — PENB ho započítává do „celkové
+dodané energie", ale nikdo za něj neplatí. Kdyby se vzalo celkové číslo z průkazu,
+spotřeba haly s tepelným čerpadlem by se nadsadila: u testovacího průkazu (nová
+hala, 30 366 m²) je celková dodaná energie 83,9 kWh/(m²·rok), z toho zaplacená
+elektřina jen 32,3 — zbylých 1 568 MWh/rok je energie okolí. Ostatní paliva se
+oceňují cenou plynu.
+
+Intenzita (kWh/m²) se počítá z plochy *v průkazu*, protože je to vlastnost budovy.
+Pole „Pronajatá plocha" se pak dá změnit (nájemce jen části haly) a celkové MWh
+i úspora se přepočítají při stejné intenzitě.
+
+Průkaz budovy **menší než 500 m²** (pod rozsahem kalkulačky) se uloží, ale do
+polí se nepřenese: všechny posuvníky spadnou na minimum (500 m², 0 MWh) a
+výsledek ukáže „Vaše budova je na špičkové úrovni". Je to obchodní rozhodnutí —
+přepočet na 500 m² by ukazoval čísla, která v průkazu nejsou.
+
+Kalkulačka hodnoty ověřuje proti součtovému řádku tabulky (MWh/rok celkem): když
+se energonositelé nesečtou s tolerancí 1 %, uživatel dostane výzvu hodnoty
+zkontrolovat. PENB uvádí **vypočtenou** spotřebu při typickém užívání, ne
+naměřenou z vyúčtování.
+
+Ve shrnutí po nahrání se ukazuje **jen plocha, elektřina a plyn** (obchodní
+rozhodnutí 10/2026) — vyloučení energie okolí ani přičtení ostatních paliv k plynu
+se návštěvníkovi nevysvětluje. Jediné upozornění, které se zobrazí, je výzva ke
+kontrole, když nesedí součet tabulky (možné chybné přečtení).
+
+*Funkce: [`parsePenb()`](src/lib/penb.ts), [`toPenbValues()`](src/lib/penbUpload.ts),
+`handleCertificate` v [`CalculatorPage.tsx`](src/components/CalculatorPage.tsx).*
 
 ## 3. Aktuální spotřeba (PNE)
 
@@ -175,6 +221,7 @@ v `tests/`:
 | `tests/calc.test.ts` | Vzorec proti ručně dopočítaným hodnotám (ne přepočtem z kódu) — rozpad dle třídy PENB, nezávislé oceňování současné a referenční budovy, floor na 0 u nákladů/CO₂ (samostatně pro každou metriku), zlomový bod pro mix 30:70, chování na hranici referenční hodnoty, invarianty a formátování čísel. |
 | `tests/csv.test.ts` | Parser CSV z Google Sheetu — uvozovky, čárky uvnitř polí, CRLF, chybějící sloupce. |
 | `tests/data.test.ts` | Shodu `data/*.json` se šablonou v `reference/google-sheet-template/*.csv` (obojí se udržuje ručně, takže hrozí rozjetí) a rozsahy hodnot. |
+| `tests/penb.test.ts` | Čtení průkazu PENB na syntetických protokolech (různá rozložení tabulek, vyloučení energie okolí, kontrola součtů, odmítnutí skenů a ne-PENB souborů) a ochrany endpointu pro nahrání (kontrola PDF hlavičky, Origin, rate limit). |
 | `tests/security.test.ts` | Odolnost proti nepřátelským datům z Google Sheetu a proti tomu, co může návštěvník napsat do polí — plus kontrolu bezpečnostních hlaviček. |
 
 Dva referenční příklady (třída C a D při 15 000 m²) jsou navíc ověřené proti

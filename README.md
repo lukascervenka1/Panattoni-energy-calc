@@ -8,7 +8,9 @@ nejúspornějších budov v ČR* (Česká spořitelna / CEVRE Consultants / Ener
 ## Jak to funguje
 
 - Uživatel zvolí PENB třídu své budovy, plochu a spotřebu ELE/plynu (posuvníky se
-  přednastaví podle třídy, ale jde je přepsat skutečnou spotřebou z vyúčtování).
+  přednastaví podle třídy, ale jde je přepsat skutečnou spotřebou z vyúčtování),
+  nebo nahraje PDF svého průkazu PENB a hodnoty se doplní z něj (viz
+  [Nahrání průkazu PENB](#nahrání-průkazu-penb)).
 - Aplikace spočítá roční úsporu v €, úsporu v MWh, snížení CO₂ a kumulativní úsporu
   za 10 let vůči referenční hodnotě (nejúspornější čtvrtina portfolia Panattoni).
 - Pod kalkulačkou je tabulka anonymizovaných srovnatelných hal a rozklikávací
@@ -97,6 +99,101 @@ Aplikace CSV znovu stahuje nejpozději každých 5 minut (`revalidate: 300` v
 bez nutnosti nového nasazení. Pokud stažení selže nebo proměnné nejsou nastavené,
 aplikace tiše spadne zpět na vestavěná data — nikdy nespadne s chybou. Barevná
 tečka v horní liště webu ukazuje, který zdroj dat je právě aktivní.
+
+## Nahrání průkazu PENB
+
+Návštěvník může místo ručního zadání nahrát PDF svého průkazu energetické
+náročnosti budovy. Kalkulačka z něj přečte energeticky vztažnou plochu a dodanou
+energii po energonositelích (sekce B protokolu), doplní je do polí a průkaz si
+uloží pro budování vlastních dat. Jak se hodnoty z průkazu dostanou do výpočtu
+(a proč se energie okolního prostředí nepočítá), viz
+[CALCULATION.md](CALCULATION.md#hodnoty-z-nahraného-průkazu-penb).
+
+| Soubor | Co dělá |
+|---|---|
+| [src/components/PenbUpload.tsx](src/components/PenbUpload.tsx) | Drag & drop / výběr souboru, souhlas, stavy nahrávání |
+| [src/app/api/penb/route.ts](src/app/api/penb/route.ts) | Endpoint: kontroly, čtení PDF, uložení |
+| [src/lib/penbReader.ts](src/lib/penbReader.ts) | Spustí čtení v samostatném vlákně a hlídá mu čas a paměť |
+| [src/lib/penbWorker.ts](src/lib/penbWorker.ts), [src/lib/penbPdf.ts](src/lib/penbPdf.ts) | To vlákno: vytažení textu z PDF (pdf.js) |
+| [src/lib/penb.ts](src/lib/penb.ts) | Čtení hodnot z textu průkazu (čistá funkce, pokrytá testy) |
+| [src/lib/penbStore.ts](src/lib/penbStore.ts) | Uložení do Vercel Blob |
+
+### Zapnutí ukládání (jednorázově ve Vercelu)
+
+1. Vercel → projekt → **Storage → Create → Blob**, přístup zvolte **Private**.
+2. Store připojte k projektu (Production i Preview). Vercel sám přidá proměnnou
+   `BLOB_READ_WRITE_TOKEN` — pak je potřeba nový deploy.
+3. Bez té proměnné vše funguje dál, jen se průkazy **neukládají** (v logu je
+   varování `[penb] BLOB_READ_WRITE_TOKEN is not set`).
+
+Uložené průkazy najdete ve Vercelu pod **Storage → (váš Blob store) → Browser**,
+složka `penb/`. Ke každému průkazu jsou dva soubory se stejným názvem (SHA-256
+obsahu, takže opakované nahrání téhož PDF nevytváří duplikát):
+
+- `<hash>.pdf` — původní průkaz,
+- `<hash>.json` — co jsme z něj přečetli (plocha, MWh po energonositelích,
+  evidenční číslo, obec, typ využití, datum vyhotovení), čas nahrání, jazyk a
+  verze souhlasu, se kterou návštěvník souhlasil.
+
+Záměrně se **neukládá** IP adresa, původní název souboru ani nic o prohlížeči.
+Průkazy, které nejdou přečíst vůbec (sken bez textu, PDF, které není PENB), se
+neukládají — nevíme, co obsahují. Průkaz, který je PENB, ale tabulku z něj
+přečíst nejde, se uloží (s `parseError`), aby šel doplnit ručně.
+
+### Ochrana endpointu
+
+Přijímá jen POST z vlastní domény (kontrola `Origin`), max. 4 MB, jen soubory
+s PDF hlavičkou (ne podle přípony), max. 150 stran a 200 000 textových prvků.
+Z PDF se nic nevykresluje ani nespouští. Samotné čtení běží v **samostatném
+vlákně** (worker thread), které se okamžitě ukončí po 15 s nebo když paměť
+naroste o víc než 768 MB — PDF se dá zabalit tak, že ~1 MB souboru se rozbalí
+na gigabajty, a bez toho by shodil celou funkci včetně požadavků ostatních
+návštěvníků. Reálné průkazy se čtou do 1 s a do 200 MB. Limit 10 nahrání za 10 minut na
+IP je jen orientační (na serverless běží zvlášť v každé instanci) — **skutečný
+rate limit nastavte ve Vercel Firewall**: Firewall → Rules → nové pravidlo pro
+cestu `/api/penb`, akce *Rate limit* (např. 10 požadavků / 10 min / IP).
+
+### Souhlas a GDPR
+
+Text souhlasu je v [src/lib/i18n.ts](src/lib/i18n.ts) (`penb.consent`).
+**Ostrý provoz schválilo právní oddělení Panattoni (11/2026).** Kalkulačka je
+plně použitelná i bez nahrání průkazu, takže souhlas je dobrovolný, ne
+podmínka služby. Průkaz obsahuje osobní údaje energetického specialisty
+(jméno, telefon, e-mail) a často název stavebníka/vlastníka. Blob nic
+automaticky nemaže — průkazy se mažou ručně ve Vercelu.
+
+Při změně textu souhlasu zvyšte `PENB_CONSENT_VERSION` v
+[src/lib/penbUpload.ts](src/lib/penbUpload.ts) — ukládá se ke každému průkazu.
+
+### Známé limity
+
+Kalkulačka umí číst dva zdroje čísel:
+
+1. **Protokol podle vyhlášky 264/2020**, sekce B (celková dodaná energie po
+   energonositelích) — novější průkazy.
+2. **Přiložený výpočet z programu Energie** (Svoboda Software), tabulka
+   „Součty pro jednotlivé energonositele“ — u starších průkazů podle vyhlášky
+   78/2013, kde jsou protokolové strany často nečitelné. Bere se jen první
+   výpočet; druhý („DOPORUČENÍ“) je stav po navržených opatřeních.
+
+Ověřeno na 10 reálných průkazech (10/2026): **6 přečteno, všechny se součty
+sedícími na tabulku průkazu.** Zbylé 4 přečíst nejde, protože v nich čísla nejsou
+jako text — sken štítku, tabulky vložené jako obrázek (starý průkaz
+z PowerPointu) a dva průkazy, jejichž tabulky jsou v PDF uložené písmem bez
+převodu na znaky (z textu vyjde `!"#$%&'(…`). Na ty by bylo potřeba OCR. Návštěvník
+v tom případě dostane výzvu zadat hodnoty ručně a průkaz se (je-li to PENB)
+uloží k ručnímu doplnění.
+
+S každým novým vzorkem je dobré pustit lokální kontrolu — jde zadat jeden
+soubor i celou složku:
+
+```bash
+PENB_SAMPLE_PDF=/cesta/k/prukazu.pdf npm test
+PENB_SAMPLE_PDF=/cesta/ke/slozce npm test
+```
+
+Skutečné průkazy do repa nepatří (osobní údaje specialisty), testy proto
+používají syntetické.
 
 ## Nasazení
 
