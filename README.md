@@ -100,6 +100,14 @@ bez nutnosti nového nasazení. Pokud stažení selže nebo proměnné nejsou na
 aplikace tiše spadne zpět na vestavěná data — nikdy nespadne s chybou. Barevná
 tečka v horní liště webu ukazuje, který zdroj dat je právě aktivní.
 
+## Měření návštěvnosti
+
+Web používá **Vercel Web Analytics** (`<Analytics />` v
+[src/app/layout.tsx](src/app/layout.tsx)). Měří zobrazení stránek bez cookies
+a bez osobních údajů, takže nepotřebuje cookie lištu. Aby se data sbírala, musí
+být ve Vercelu zapnuté: projekt → **Analytics → Enable** (pak nový deploy).
+Lokálně běží v ladicím režimu a nic neodesílá.
+
 ## Nahrání průkazu PENB
 
 Návštěvník může místo ručního zadání nahrát PDF svého průkazu energetické

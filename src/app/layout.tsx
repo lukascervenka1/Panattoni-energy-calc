@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bai_Jamjuree, Rubik } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { LocaleProvider } from "@/lib/LocaleContext";
 import "./globals.css";
 
@@ -65,6 +66,10 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[var(--color-bg)] text-[var(--color-text)]">
         <LocaleProvider>{children}</LocaleProvider>
+        {/* Cookieless page views (Vercel Web Analytics). Its script is
+            same-origin (/_vercel/insights) and injected by our own nonce'd
+            bundle, so the strict CSP in src/proxy.ts lets it through. */}
+        <Analytics />
       </body>
     </html>
   );
